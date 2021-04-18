@@ -1,0 +1,73 @@
+.task {
+    position: relative;
+
+    flex: 1;
+    flex-basis: 30%;
+
+    width: auto;
+    max-width: 30%;
+
+    margin: 1rem;
+    padding: 1.5rem 2rem;
+
+    border-radius: 8px;
+    background: rgb(245, 245, 245);
+    /* background: linear-gradient(140deg, rgb(255, 255, 255) 0%, rgb(240, 240, 240) 70%); */
+    box-shadow: 
+        -15px -15px 15px rgba(255, 255, 255, 0.2),
+        15px 15px 15px rgba(0, 0, 0, 0.05);
+}
+.task:hover {
+    background: white;
+    transition: all 700ms linear;
+}
+.task:hover h2 {
+    color: rgb(60, 60, 70);
+    transition: all 500ms linear;
+}
+.task h2 {
+    margin-bottom: .5rem;
+    font-size: 1.25rem;
+}
+.task p {
+    margin-bottom: .75rem;
+    font-size: 1rem;
+    color:rgba(0, 0, 0, 0.4);
+}
+
+.completed:before {
+    content:'';
+
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    
+    display: block;
+    height: .5rem;
+    width: .5rem;
+    background: rgb(98, 255, 36);
+    border-radius: 50%;
+    border: 1px solid rgb(220, 220, 220);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+.incompleted::before {
+    content:'';
+
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+    
+    display: block;
+    height: .5rem;
+    width: .5rem;
+    background: rgb(255, 94, 0);
+    border-radius: 50%;
+    border: 1px solid rgb(219, 219, 219);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1200px) {
+    .task {
+        max-width: 50%;
+    }
+}
