@@ -39,8 +39,9 @@ class MyTodoList extends React.Component {
     ]
   }
 
-  clickHandler = () => {
-    return console.log(`Task ${this.state.id} completed status = ${this.state.completed}`)
+  clickHandler = (taskID) => {
+    var currTask = this.state.tasks[taskID]
+    console.log(`Task ${currTask.id} completed status = ${currTask.completed}`)
   }
 
   render() {
@@ -54,7 +55,7 @@ class MyTodoList extends React.Component {
             name={task.name}
             description={task.description}
             completed={task.completed}
-            onClick={this.clickHandler}
+            onClick={ () => this.clickHandler(task.id)}
           />
         )
       })
