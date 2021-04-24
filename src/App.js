@@ -47,7 +47,7 @@ class MyTodoList extends React.Component {
   render() {
     const tasks = this.state.tasks    
     return (
-      tasks.map( (task) => { 
+      tasks.map( (task, id) => { 
         return(
           <Task
             key={task.id}
@@ -55,7 +55,7 @@ class MyTodoList extends React.Component {
             name={task.name}
             description={task.description}
             completed={task.completed}
-            onClick={ () => this.clickHandler(task.id)}
+            onClick={ () => this.clickHandler(id)}
           />
         )
       })
