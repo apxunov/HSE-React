@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css';
 
-import Task from './components/Task/Task'
+import TaskList from './components/TaskList/TaskList'
+import TaskAdd from './components/TaskAdd/TaskAdd';
 
 class MyTodoList extends React.Component {
   state = {
@@ -44,22 +45,19 @@ class MyTodoList extends React.Component {
     console.log(`Task ${currTask.id} completed status = ${currTask.completed}`)
   }
 
+
+
   render() {
-    const tasks = this.state.tasks    
+    const tasks = this.state.tasks
+    tasks.map( (t) => console.log(t.description))
+
     return (
-      tasks.map( (task, id) => { 
-        return(
-          <Task
-            key={task.id}
-            id={task.id}
-            name={task.name}
-            description={task.description}
-            completed={task.completed}
-            onClick={ () => this.clickHandler(id)}
-          />
-        )
-      })
-    )
+      <>
+        <TaskList
+            tasksList={tasks}/>
+        <TaskAdd/>
+      </>
+    )    
   }
 }
 
