@@ -63,7 +63,7 @@ class MyTodoList extends React.Component {
     const name = document.getElementsByName('taskName')[0].value // инпут названия таска
     const description = document.getElementsByName('taskDescription')[0].value // инпут описания таска
 
-    description&&name ? this.setState( (currentState) => {
+    description&&name ? this.setState( (currentState) => { // если поля desription и name заполнены.. 
       const newTasksList = [...currentState.tasks] // дублируем таски из стейта
       const tasksLastID = newTasksList.length // присвоем IDшник новой таске = +1 к последнему таскID из стейта
       newTasksList[tasksLastID] = { // если name и desciption заполнены..
@@ -72,12 +72,12 @@ class MyTodoList extends React.Component {
         description: description,
         completed: false
       } 
-      console.log(newTasksList)
+
       return {
-        tasks: newTasksList
+        tasks: newTasksList //.. то обновляем стейт
       }
     })
-    : alert('Enter name and description!')
+    : alert('Enter name and description!') // ..а если пусты, то алёртим пользователя, чтобы тот внес данные
   }
 
   render() {
