@@ -1,0 +1,76 @@
+:root {
+    --main-color: #260063;
+    --text-color: #555;
+    --accent-color: #222;
+}
+
+.task {
+    position: relative;
+
+    flex: 1;
+    flex-basis: 30%;
+
+    width: auto;
+    max-width: 30%;
+
+    margin: 1rem;
+    padding: 1.5rem 3rem;
+
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+
+    box-shadow: 
+        -15px -15px 15px rgba(255, 255, 255, 0.2),
+        15px 15px 15px rgba(0, 0, 0, 0.05);
+}
+.task:hover {
+    box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.25);
+    transition: all 700ms linear;
+}
+
+.task h2 {
+    margin-bottom: .5rem;
+    font-size: 1.25rem;
+
+    font-weight: bold;
+    font-size: 20px;
+
+    color: var(--main-color);
+}
+.task p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.completed:before {
+    content:'';
+
+    position: relative;
+    margin-bottom: 1.5rem;
+    
+    display: block;
+    
+    height: 60px;
+    width: 60px;
+
+    background: no-repeat center/100% url('./icons//completed.svg');
+}
+.incompleted::before {
+    content:'';
+
+    position: relative;
+    margin-bottom: 1.5rem;
+    
+    display: block;
+    
+    height: 60px;
+    width: 60px;
+
+    background: no-repeat center/100% url('./icons//incompleted.svg');
+}
+
+@media (max-width: 1200px) {
+    .task {
+        max-width: 50%;
+    }
+}

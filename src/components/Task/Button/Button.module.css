@@ -1,0 +1,21 @@
+.btn {
+    margin-top: 1rem;
+    padding: .15rem;
+
+    width: 110px;
+    height: 45px;
+
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--main-color);
+
+    background: transparent;
+
+    border-radius: 100px;
+    border: 2px solid var(--main-color);
+
+    cursor: pointer;
+}
+.btn:hover {
+    box-shadow: 2px 4px 8px rgba(160, 160, 160, 0.5);
+}
