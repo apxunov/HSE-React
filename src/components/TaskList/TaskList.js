@@ -1,7 +1,7 @@
 import React from 'react'
 import Task from '../Task/Task'
 
-const TaskList = ({tasksList}) => {
+const TaskList = ( {tasksList, onClick} ) => {
     return (
         tasksList.map( task => {
             return (
@@ -11,6 +11,7 @@ const TaskList = ({tasksList}) => {
                     name={task.name}
                     description={task.description}
                     completed={task.completed}
+                    onClick={onClick}
                 />
             )
         })

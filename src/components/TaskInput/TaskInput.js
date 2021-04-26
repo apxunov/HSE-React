@@ -16,7 +16,7 @@ class TaskInput extends React.Component {
       // console.log(this.state)
   
       return (
-        <div>
+        <fieldset>
           <TextInput 
               name="taskName" 
               placeholder='Enter task name'
@@ -33,7 +33,7 @@ class TaskInput extends React.Component {
               value={this.state.description} 
               onChange={this.handleChange} 
           />
-        </div>
+        </fieldset>
       )
     }
   }
