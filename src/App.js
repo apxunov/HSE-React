@@ -43,34 +43,6 @@ class MyTodoList extends React.Component {
       ]
     };
   }
-  
-
-  clickHandler = (taskID) => {
-    var currTask = this.state.tasks[taskID]
-    console.log(`Task ${currTask.id} completed status = ${currTask.completed}`)
-  }
-
-  submitHandler = (event) => {
-    event.preventDefault()
-
-    const currTasks = this.state.tasks
-    let newTasksList = [...currTasks] //делаю дубликат оригинального стейта
-
-    const name = document.getElementsByName('taskName')[0].value // инпут названия таска
-    const description = document.getElementsByName('taskDescription')[0].value // инпут описания таска
-
-    newTasksList.push( { //добавляю в дубликат стейта новую таску
-          id: 'TEST',
-          name: {name},
-          description: {description},
-          completed: false
-    } )
-    
-    this.setState({
-      tasks: {newTasksList} //обновляю стейт
-    })
-    return console.log(newTasksList)
-  }
 
   handleTaskStatus = (event) => {
     const clickedBtn = event.target // находим нажатую внтури Task кнопку
@@ -83,6 +55,29 @@ class MyTodoList extends React.Component {
         tasks: newTasksList // сетим новым стейт
       }
     })
+  }
+
+  submitHandler = (event) => {
+    event.preventDefault()
+
+    const name = document.getElementsByName('taskName')[0].value // инпут названия таска
+    const description = document.getElementsByName('taskDescription')[0].value // инпут описания таска
+
+    description&&name ? this.setState( (currentState) => {
+      const newTasksList = [...currentState.tasks] // дублируем таски из стейта
+      const tasksLastID = newTasksList.length // присвоем IDшник новой таске = +1 к последнему таскID из стейта
+      newTasksList[tasksLastID] = { // если name и desciption заполнены..
+        id: tasksLastID+1, // то творим новый объект для нового таска
+        name: name,
+        description: description,
+        completed: false
+      } 
+      console.log(newTasksList)
+      return {
+        tasks: newTasksList
+      }
+    })
+    : alert('Enter name and description!')
   }
 
   render() {
