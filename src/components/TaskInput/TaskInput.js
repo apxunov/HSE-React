@@ -20,7 +20,7 @@ class TaskInput extends React.Component {
               name="taskName" 
               placeholder='Enter task name'
               size=''
-              isRequired='1'
+              isRequired='true'
               value={this.state.name} 
               onChange={this.handleChange} 
           />
@@ -28,7 +28,7 @@ class TaskInput extends React.Component {
               name='taskDescription'
               placeholder='Enter task description'
               size=''
-              isRequired='1'
+              isRequired='true'
               value={this.state.description} 
               onChange={this.handleChange} 
           />

@@ -6,9 +6,7 @@ import TaskAdd from './components/TaskAdd/TaskAdd';
 
 
 class MyTodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    state = {
       tasks: [
         {
           id: 1,
@@ -42,8 +40,8 @@ class MyTodoList extends React.Component {
         },
       ]
     };
-  }
 
+  /*
   handleTaskStatus = (event) => {
     const clickedBtn = event.target // находим нажатую внтури Task кнопку
     const taskID = clickedBtn.closest('div').id // получаем id Task'а
@@ -51,6 +49,18 @@ class MyTodoList extends React.Component {
     this.setState((currentState) => {
       const newTasksList = [...currentState.tasks] // дублируем стейт
       newTasksList[taskID-1] = { ...newTasksList[taskID-1], completed: !currentState.tasks[taskID-1].completed } // инвертируем булевое значение
+      return {
+        tasks: newTasksList // сетим новым стейт
+      }
+    })
+  }
+  */
+
+  handleTaskStatus = (taskID) => {
+    const taskToChange_id = this.state.tasks.findIndex((task) => task.id === taskID); // находим id таски, которую нужно изменить 
+    this.setState((currentState) => {
+      const newTasksList = [...currentState.tasks] // дублируем стейт
+      newTasksList[taskToChange_id] = { ...newTasksList[taskToChange_id], completed: !currentState.tasks[taskToChange_id].completed } // инвертируем булевое значение
       return {
         tasks: newTasksList // сетим новым стейт
       }

@@ -11,7 +11,7 @@ const Task = ({ id, name, description, completed, onClick }) => {
       <div id={id} className={cls.join(' ')}>
           <h2>{name}</h2>
           <p>{description}</p>
-          { completed ? <Button btnName='Undone' onClick={onClick}/> : <Button btnName='Done' onClick={onClick}/> }
+          { completed ? <Button btnName='Undone' onClick={() => onClick(id)}/> : <Button btnName='Done' onClick={() => onClick(id)}/> }
       </div>
     )
   }
