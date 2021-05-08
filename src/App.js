@@ -76,7 +76,6 @@ class MyTodoList extends React.Component {
     return (
       <>
         <TaskAdd
-            // onSubmit={this.submitHandler}/>
             submitHandler={this.submitHandler}
         />
         <TaskList

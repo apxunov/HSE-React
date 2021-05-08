@@ -8,7 +8,7 @@ const TextInput = ({ name, placeholder, size, isRequired, onChange }) => {
           <label className={classes['custom-field']} htmlFor={`${name}_input`}>
             <input className={classes['text-input']}
                 id={`${name}_input`} 
-                name={`${name}`} 
+                name={name} 
                 type='text' 
                 placeholder={`${placeholder}`} 
                 size={size} 
@@ -20,11 +20,10 @@ const TextInput = ({ name, placeholder, size, isRequired, onChange }) => {
           <label className={classes['custom-field']} htmlFor={`${name}_input`}>
             <input className={classes['text-input']}
                 id={`${name}_input`} 
-                name={`${name}`} 
+                name={name} 
                 type='text' 
                 placeholder={`${placeholder}`} 
-                size={size} 
-                required 
+                size={size}  
                 onChange={onChange}/>
             <span className={classes['input-placeholder']}>{placeholder}</span>
           </label>

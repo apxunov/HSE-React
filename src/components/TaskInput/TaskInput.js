@@ -41,7 +41,6 @@ class TaskInput extends React.Component {
                 onChange={this.handleChange} 
             />
             <Button 
-                // onClick={onSubmit}
                 btnName={'Submit'}
                 type={'submit'}
             />

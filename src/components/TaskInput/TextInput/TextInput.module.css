@@ -45,29 +45,3 @@ input::placeholder {
   color: #222;
 }
 
-
-/* .custom-field input:focus + .input-placeholder {
-    top: 10px;
-    font-size: 14px;
-    color: #1d1d1d;
-} */
-
-/* INPUT 
-.text-input {
-    width: 100%;
-    border: none;
-    background: rgba(240, 240, 240, 1);
-
-    padding: 12px;
-    border-radius: 4px;
-
-    outline: none;
-    appearance: none;
-}
-
-.text-input::placeholder {
-    color: #222;
-    font-size: 1rem;
-    transition: color .1s ease;
-} */
-
