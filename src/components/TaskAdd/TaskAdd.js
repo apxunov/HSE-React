@@ -1,22 +1,18 @@
 import React from 'react'
 
 import TaskInput from '../TaskInput/TaskInput'
-import Button from '../Task/Button/Button'
 
 import classes from '../Task/Task.module.css'
 import './TaskAdd.module.css';
 
-const TaskAdd = ({onSubmit}) => {
-    const cls = [classes.task]
+const TaskAdd = ({submitHandler}) => {
     return (
-        <form className={cls.join(' ')}>
+        <div className={classes.task}>
             <h2>Create new task</h2>
-            <TaskInput/>
-            <Button 
-                onClick={onSubmit}
-                btnName={'Submit'}
+            <TaskInput
+                onSubmitHandler={submitHandler}
             />
-        </form>
+        </div>
     )
   }
 

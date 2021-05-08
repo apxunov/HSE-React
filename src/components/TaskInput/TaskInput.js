@@ -1,5 +1,7 @@
 import React from 'react'
+
 import TextInput from './TextInput/TextInput'
+import Button from '../Task/Button/Button'
 
 class TaskInput extends React.Component {
     state = {
@@ -11,28 +13,40 @@ class TaskInput extends React.Component {
       const { value, name } = event.currentTarget
       this.setState({ [name]: value })
     }
+
+    handleSubmit = (event) => {
+      event.preventDefault()
+      return this.props.onSubmitHandler(this.state.taskName, this.state.taskDescription)
+    }
   
     render() {
   
       return (
-        <fieldset>
-          <TextInput 
-              name="taskName" 
-              placeholder='Enter task name'
-              size=''
-              isRequired='true'
-              value={this.state.name} 
-              onChange={this.handleChange} 
-          />
-          <TextInput 
-              name='taskDescription'
-              placeholder='Enter task description'
-              size=''
-              isRequired='true'
-              value={this.state.description} 
-              onChange={this.handleChange} 
-          />
-        </fieldset>
+        <form onSubmit={this.handleSubmit}>
+          <fieldset>
+            <TextInput 
+                name="taskName" 
+                placeholder='Enter task name'
+                size=''
+                isRequired='true'
+                value={this.state.name} 
+                onChange={this.handleChange} 
+            />
+            <TextInput 
+                name='taskDescription'
+                placeholder='Enter task description'
+                size=''
+                isRequired='true'
+                value={this.state.description} 
+                onChange={this.handleChange} 
+            />
+            <Button 
+                // onClick={onSubmit}
+                btnName={'Submit'}
+                type={'submit'}
+            />
+          </fieldset>
+        </form>
       )
     }
   }
