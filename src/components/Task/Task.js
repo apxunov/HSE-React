@@ -1,7 +1,7 @@
 import React from 'react'
-import classes from './Task.module.css'
+import classes from './Task.module.scss'
 
-import Button from './Button/Button'
+import Button from '../UI/Button/Button'
 
 const Task = ({ id, name, description, completed, onClick }) => {
     const cls = [classes.task]

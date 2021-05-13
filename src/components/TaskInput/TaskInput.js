@@ -1,7 +1,7 @@
 import React from 'react'
 
 import TextInput from './TextInput/TextInput'
-import Button from '../Task/Button/Button'
+import Button from '../UI/Button/Button'
 
 class TaskInput extends React.Component {
     state = {
@@ -20,7 +20,6 @@ class TaskInput extends React.Component {
     }
   
     render() {
-  
       return (
         <form onSubmit={this.handleSubmit}>
           <fieldset>

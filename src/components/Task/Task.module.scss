@@ -1,8 +1,4 @@
-:root {
-    --main-color: #260063;
-    --text-color: #555;
-    --accent-color: #222;
-}
+@import '../globalStyleVariables/global.scss';
 
 .task {
     position: relative;
@@ -22,24 +18,26 @@
     box-shadow: 
         -15px -15px 15px rgba(255, 255, 255, 0.2),
         15px 15px 15px rgba(0, 0, 0, 0.05);
-}
-.task:hover {
-    box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.25);
-    transition: all 700ms linear;
-}
 
-.task h2 {
-    margin-bottom: .5rem;
-    font-size: 1.25rem;
+    &:hover {
+        box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.25);
+        transition: all 700ms linear;
+    }
 
-    font-weight: bold;
-    font-size: 20px;
+    h2 {
+        margin-bottom: .5rem;
+        font-size: 1.25rem;
+    
+        font-weight: bold;
+        font-size: 20px;
+    
+        color: $main-color;
+    }
 
-    color: var(--main-color);
-}
-.task p {
-    font-size: 1rem;
-    color: var(--text-color);
+    p {
+        font-size: 1rem;
+        color: $text-color;
+    }
 }
 
 .completed:before {

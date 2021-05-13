@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './TextInput.module.css'
+import classes from './TextInput.module.scss'
 
 const TextInput = ({ name, placeholder, size, isRequired, onChange }) => {
     return (
