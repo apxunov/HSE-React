@@ -1,3 +1,5 @@
+@import '../../globalStyleVariables/global.scss';
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -17,13 +19,12 @@
         padding: 12px;
     
         background: rgba(240, 240, 240, 1);
-        border: none;
         border-radius: 3px;
-        
+        border: none;
         appearance: none;
         outline: none;
     
-        font-size: 14px;
+        font-size: $paragraphFontSize_smaller;
 
         &::placeholder { color: transparent }
     }

@@ -1,3 +1,5 @@
+@import './components/globalStyleVariables/global.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +12,7 @@
 }
 
 body {
-  background: rgba(240, 240, 240, 1);
+  background: $pageBackgroundColor;
 }
 
 .tasks-wrapper__layout {
@@ -20,7 +22,6 @@ body {
 
   display: flex;
   flex-wrap: wrap;
-
   justify-content: flex-start;
 }
 
