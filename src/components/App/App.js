@@ -5,9 +5,17 @@ import '../App/App.scss';
 import MyTodoList from '../MyTodoList/MyTodoList'
 import Switch from '../UI/Switch/Switch'
 
+// Импорт контекста
+import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
+
+import classes from './App.scss'
+import classnames from "classnames/bind"
+const cx = classnames.bind(classes)
+// import { createGlobalStyle } from 'styled-components'
+
 class App extends React.Component {
   state = {
-    theme: "light",
+    theme: DEFAULT_THEME,
     tasks: [
       {
         id: 1,
@@ -42,6 +50,7 @@ class App extends React.Component {
     ]
   };
 
+  // Смена статуса таски completed: done / undone
   handleTaskStatus = (taskID) => {
     const taskToChange_id = this.state.tasks.findIndex((task) => task.id === taskID); // находим id таски, которую нужно изменить 
     this.setState((currentState) => {
@@ -53,6 +62,7 @@ class App extends React.Component {
     })
   }
 
+  // Добавление таски
   submitHandler = (name, value) => {
     name&&value ? this.setState( (currentState) => { // если поля desription и name заполнены.. 
       const newTasksList = [...currentState.tasks] // дублируем таски из стейта
@@ -71,16 +81,30 @@ class App extends React.Component {
     : alert('Enter name and description!') // ..а если пусты, то алёртим пользователя, чтобы тот внес данные
   }
 
+  // Смена темы
+  themeChangeHadnler = (event) => {
+    const themeMode = event.target.checked ? 'dark' : 'light'
+    this.setState( {theme: themeMode} )
+  }
+
   render() {
     return (
-      <div className='tasks-wrapper__layout'>
-        <Switch/>
-        <MyTodoList 
-            tasks={this.state.tasks}
-            submitHandler={this.submitHandler}
-            handleTaskStatus={this.handleTaskStatus}
-        />
-    </div>
+      <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
+        <div className={cx('tasks-wrapper__layout')}>
+          <ThemeContext.Provider value={this.state.theme}>
+            <>
+              <Switch
+                  themeChangeHadnler={this.themeChangeHadnler}
+              />
+              <MyTodoList 
+                  tasks={this.state.tasks}
+                  submitHandler={this.submitHandler}
+                  handleTaskStatus={this.handleTaskStatus}
+              />
+            </>
+          </ThemeContext.Provider>
+        </div>
+      </section>
     )
   }
 }
