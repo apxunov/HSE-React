@@ -4,9 +4,11 @@ import './App.scss';
 import TaskList from './components/TaskList/TaskList'
 import TaskAdd from './components/TaskAdd/TaskAdd';
 
+import Switch from './components/UI/Switch/Switch'
 
 class MyTodoList extends React.Component {
     state = {
+      theme: "light",
       tasks: [
         {
           id: 1,
@@ -91,6 +93,7 @@ class MyTodoList extends React.Component {
 function App() {
   return (
       <div className='tasks-wrapper__layout'>
+        <Switch/>
         <MyTodoList/>
       </div>
   )
