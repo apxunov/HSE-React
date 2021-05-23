@@ -8,7 +8,7 @@ const ProjectsList = ({projectsById}) => {
         projectsArray.push({
             name: project.name,
             description: project.description,
-            tasksNum: project.tasksIds.length
+            tasksNum: project.tasksIds?.length
         })
     }
     

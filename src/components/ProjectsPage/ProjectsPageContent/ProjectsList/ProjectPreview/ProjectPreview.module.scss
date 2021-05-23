@@ -1,0 +1,87 @@
+@import '../../../../UI/globalStyleVariables/global.scss';
+
+
+// theme-Переменные 
+$project-LightMode-BgColor: #fff;
+$project-DarkMode-BgColor: #252525;
+
+.project {
+    // Базовые стили
+    position: relative;
+    cursor: pointer;
+
+    flex: 1;
+    flex-basis: 30%;
+
+    height: fit-content;
+    width: auto;
+    max-width: 30%;
+
+    margin: 1rem;
+    padding: 1.5rem 3rem;
+
+    border-radius: 20px;
+
+    // Стили, зависящие от темы
+    &-theme-light {
+        background: $project-LightMode-BgColor;
+
+        box-shadow: 
+            -15px -15px 15px rgba(255, 255, 255, 0.2),
+            15px 15px 15px rgba(0, 0, 0, 0.05);
+        
+        &:hover {
+            box-shadow: 0px 18px 40px rgba(0, 0, 0, 0.25);
+            transition: all 700ms linear;
+        }
+    
+        h2 {
+            margin-bottom: .5rem;
+        
+            font-weight: bold;
+            font-size: $header2;
+        
+            color: $main-color;
+        }
+    
+        p {
+            font-size: 1rem;
+            word-break: normal;
+            color: $text-color;
+        }
+    }
+
+    &-theme-dark {
+        background: $project-DarkMode-BgColor;
+
+        box-shadow: 
+                10px 10px 20px rgba(0, 0, 0, .5);
+        
+        &:hover {
+            background: #1d1d1d;
+            box-shadow: 4px 12px 24px rgba(0, 0, 0, 1);
+            transition: all 500ms linear;
+        }
+    
+        h2 {
+            margin-bottom: .5rem;
+        
+            font-weight: bold;
+            font-size: $header2;
+        
+            color: $main-color-dark;
+        }
+    
+        p {
+            font-size: 1rem;
+            word-break: break-all;
+            color: $text-color-dark;
+        }
+    }
+}
+   
+@media (max-width: 1200px) {
+    .project {
+        max-width: 50%;
+    }
+}

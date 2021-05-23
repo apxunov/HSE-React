@@ -39,7 +39,7 @@ const projects = [
     { 
       id: 2,
       name: 'University',
-      description: 'Here are the university tasks that need to be done',
+      description: 'Here are the university tasks must be done immediately',
       tasks: [
         {
           id: 6,

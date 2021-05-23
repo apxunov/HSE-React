@@ -68,18 +68,55 @@ class App extends React.Component {
     this.setState( {theme: themeMode} )
   }
 
+  // Создавние нового проекта
+  onProjectAddHandler = (projectName, projectDescription) => {
+    console.log(projectName, projectDescription);
+
+    // Новый проект будет иметь Id последнего +1
+    function setNewProjectId(projects) {
+      let lastId = 0
+      for (let projectId in projects) {
+        console.log(projectId);
+        if (lastId <= projectId) {
+          lastId++
+        } else {return ++lastId}
+      }
+      return ++lastId
+    }
+
+    projectName&&projectDescription 
+    ? this.setState( (currentState) => {
+        const newProjectsList = {...currentState.projectsById}
+        const projectToBeAddedID = setNewProjectId(newProjectsList)
+        newProjectsList[projectToBeAddedID] = {
+          id: projectToBeAddedID,
+          name: projectName,
+          description: projectDescription,
+          tasks: []
+        }
+        return {
+          projectsById: newProjectsList
+        }
+    })
+    : alert('Enter PROJECT name and description!') 
+  }
+
   render() {
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
-
-            <Route exact path='/'>
-              <ApplicationWrapper themeChangeHadnler={this.themeChangeHadnler}/>
-            </Route>
+          {/* <ApplicationWrapper> */}
+            <Route exact path='/'></Route>
           
             <Route path='/projects'>
-                <ProjectsPage projectsById={this.state.projectsById} tasksById={this.state.tasksById}/>
+                <ProjectsPage 
+                  projectsById={this.state.projectsById} 
+                  tasksById={this.state.tasksById}
+                  themeChangeHadnler={this.themeChangeHadnler}
+                  onProjectAddHandler={this.onProjectAddHandler}
+                />
             </Route>
+          {/* </ApplicationWrapper> */}
             
           {/* <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
                 <>

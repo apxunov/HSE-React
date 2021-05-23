@@ -1,14 +1,30 @@
 import React from 'react'
-import ProjectsList from './ProjectsList/ProjectsList'
 
-import ApplicationWrapper from '../App/ApplicationWrapper/ApplicationWrapper'
+import ProjectPageContent from './ProjectsPageContent/ProjectsPageContent'
+import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 
-const ProjectsPage = ({projectsById, tasksById}) => {
+import {ThemeContext} from '../App/ThemeContext'
+
+import classes from './ProjectsPage.module.scss'
+import classnames from "classnames/bind"
+const cx = classnames.bind(classes)
+
+const ProjectsPage = ({projectsById, tasksById, themeChangeHadnler, onProjectAddHandler}) => {
     return (
-        <ProjectsList 
-            projectsById={projectsById}
-            tasksById={tasksById}
-        />
+        <ThemeContext.Consumer>
+        {theme => {
+            return (
+                <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
+                    <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
+                    <ProjectPageContent 
+                        projectsById={projectsById}
+                        tasksById={tasksById}
+                        onProjectAddHandler={onProjectAddHandler}
+                    />
+                </section>
+            )
+        }}
+        </ThemeContext.Consumer>
     )
 }
 

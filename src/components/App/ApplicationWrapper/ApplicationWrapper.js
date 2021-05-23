@@ -1,5 +1,5 @@
 import React from 'react'
-import ThemeSwitcher from '../../UI/ThemeSwitcher/ThemeSwitcher'
+// import ThemeSwitcher from '../../UI/ThemeSwitcher/ThemeSwitcher'
 
 import {ThemeContext} from '../ThemeContext'
 
@@ -13,9 +13,9 @@ const ApplicationWrapper = ({themeChangeHadnler}) => {
             {theme => {
                 return(
                     <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
-                    <ThemeSwitcher
+                    {/* <ThemeSwitcher
                         themeChangeHadnler={themeChangeHadnler}
-                    />
+                    /> */}
                     </section>
                 )
             }}
