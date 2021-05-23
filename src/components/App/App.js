@@ -88,6 +88,18 @@ class App extends React.Component {
     ]
   };
 
+  // Смена статуса таски completed: done / undone
+  handleTaskStatus = (taskID) => {
+    const taskToChange_id = this.state.tasks.findIndex((task) => task.id === taskID); // находим id таски, которую нужно изменить 
+    this.setState((currentState) => {
+      const newTasksList = [...currentState.tasks] // дублируем стейт
+      newTasksList[taskToChange_id] = { ...newTasksList[taskToChange_id], completed: !currentState.tasks[taskToChange_id].completed } // инвертируем булевое значение
+      return {
+        tasks: newTasksList // сетим новым стейт
+      }
+    })
+  }
+
   // Добавление таски
   submitHandler = (name, value) => {
     name&&value ? this.setState( (currentState) => { // если поля desription и name заполнены.. 
