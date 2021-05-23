@@ -1,13 +1,14 @@
 import React from 'react'
 import '../App/App.scss';
 // import { BrowserRouter, Switch, Route, Link, Redirect, withRouter } from "react-router-dom"
-import { BrowserRouter} from "react-router-dom"
+import { BrowserRouter, Route} from "react-router-dom"
 
 
 // Импорт компонентов
 import ApplicationWrapper from './ApplicationWrapper/ApplicationWrapper'
-import ProjectContent from '../ProjectContent/ProjectContent'
+// import ProjectContent from '../ProjectContent/ProjectContent'
 // import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
+import ProjectsPage from '../ProjectsPage/ProjectsPage'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -68,13 +69,18 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
-            <ApplicationWrapper themeChangeHadnler={this.themeChangeHadnler}>
 
-            </ApplicationWrapper>
+            <Route exact path='/'>
+              <ApplicationWrapper themeChangeHadnler={this.themeChangeHadnler}/>
+            </Route>
+          
+            <Route path='/projects'>
+                <ProjectsPage projectsById={this.state.projectsById} tasksById={this.state.tasksById}/>
+            </Route>
+            
           {/* <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
                 <>
                   <ThemeSwitcher

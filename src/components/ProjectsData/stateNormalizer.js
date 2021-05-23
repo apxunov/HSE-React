@@ -27,6 +27,7 @@ export default function normalizeState(projectsArray) {
       return normalizedProjectsArray[project.id] = {
         id: project.id,
         name: project.name,
+        description: project.description,
         tasksIds: getTasksIdsByProject(project.tasks)
       }
     })
