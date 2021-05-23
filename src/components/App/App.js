@@ -114,6 +114,48 @@ class App extends React.Component {
   }
 
   render() {
+    // Нормализация стейта
+    const normalizeState = projectsArray => { 
+      const normalizedProjectsArray = {} // проекты с айдишниками тасок
+      const normalizedTasksArray = {} // все таски 
+      
+      const normilizedState = { 
+        projectsById: normalizedProjectsArray,
+        tasksById: normalizedTasksArray
+      }
+
+      // Получить ID тасок по проекту
+      const getTasksIdsByProject = tasks => {
+        const projectTasksIds = []
+        tasks.map(task => projectTasksIds.push(task.id))
+        return projectTasksIds
+      }
+
+      projectsArray.map( project => {
+        const projectTasks = project.tasks
+        projectTasks.map( task => {
+          return normalizedTasksArray[task.id] = {
+            id: task.id,
+            name: task.name,
+            description: task.description,
+            completed: task.completed
+          }
+        })
+        return normalizedProjectsArray[project.id] = {
+          id: project.id,
+          name: project.name,
+          tasksIds: getTasksIdsByProject(project.tasks)
+        }
+      })
+
+      return normilizedState
+    };
+
+
+    const {projectsById: projects, tasksById: tasks} = normalizeState(this.state.projects)
+    console.log('PROJECTS', projects);
+    console.log('TASKS', tasks);
+
     return (
       <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
         <div className={cx('tasks-wrapper__layout')}>
