@@ -1,7 +1,7 @@
 import React from 'react'
 
 import TextInput from './TextInput/TextInput'
-import Button from '../UI/Button/Button'
+import Button from '../../../UI/Button/Button'
 
 class TaskInput extends React.Component {
     state = {

@@ -3,7 +3,7 @@ import '../App/App.scss';
 
 // Импорт компонентов
 import MyTodoList from '../MyTodoList/MyTodoList'
-import Switch from '../UI/Switch/Switch'
+import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -173,7 +173,7 @@ class App extends React.Component {
         <div className={cx('tasks-wrapper__layout')}>
           <ThemeContext.Provider value={this.state.theme}>
             <>
-              <Switch
+              <ThemeSwitcher
                   themeChangeHadnler={this.themeChangeHadnler}
               />
               <MyTodoList 

@@ -1,14 +1,14 @@
 import React from 'react'
 
 // Импорт компонентов
-import TaskInput from '../TaskInput/TaskInput'
+import TaskInput from './TaskInput/TaskInput'
 
 // Импорт контекста 
-import { ThemeContext } from "../App/ThemeContext"
+import { ThemeContext } from '../../App/ThemeContext'
 
 // Импорт стилей
 import './TaskAdd.module.scss';
-import classes from '../Task/Task.module.scss'
+import classes from '../TaskList/Task/Task.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 

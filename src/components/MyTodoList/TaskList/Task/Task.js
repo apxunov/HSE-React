@@ -1,10 +1,10 @@
 import React from 'react'
 
 // Импоррт компонентов
-import Button from '../UI/Button/Button'
+import Button from '../../../UI/Button/Button'
 
 // Импорт контекста 
-import { ThemeContext } from "../App/ThemeContext"
+import { ThemeContext } from "../../../App/ThemeContext"
 
 // Импорт стилей
 import classes from './Task.module.scss'

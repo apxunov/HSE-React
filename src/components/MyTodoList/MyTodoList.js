@@ -1,8 +1,8 @@
 import React from 'react'
 
 // Импорт компонентов
-import TaskList from '../TaskList/TaskList'
-import TaskAdd from '../TaskAdd/TaskAdd';
+import TaskList from './TaskList/TaskList'
+import TaskAdd from './TaskAdd/TaskAdd';
 
 class MyTodoList extends React.Component {
   render() {

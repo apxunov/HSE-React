@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Импорт стилей
-import classes from '../Switch/Switch.module.scss'
+import classes from '../ThemeSwitcher/ThemeSwitcher.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
