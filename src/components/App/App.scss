@@ -21,24 +21,24 @@ div#root {
   width: 100%;
 }
 
-.application-wrapper {
-  min-height: 100vh;
-  &-theme-light {
-    background: $page-BackgroundColor-light;
-  }
-  &-theme-dark {
-    background: $page-BackgroundColor-dark;
-  }
-}
+// .application-wrapper {
+//   min-height: 100vh;
+//   &-theme-light {
+//     background: $page-BackgroundColor-light;
+//   }
+//   &-theme-dark {
+//     background: $page-BackgroundColor-dark;
+//   }
+// }
 
-.tasks-wrapper__layout {
-  max-width: 1440px;
-  width: 80vw;
+// .tasks-wrapper__layout {
+//   max-width: 1440px;
+//   width: 80vw;
 
-  margin: auto auto;
+//   margin: auto auto;
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: flex-start;
+// }
 

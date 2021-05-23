@@ -1,9 +1,13 @@
 import React from 'react'
 import '../App/App.scss';
+// import { BrowserRouter, Switch, Route, Link, Redirect, withRouter } from "react-router-dom"
+import { BrowserRouter} from "react-router-dom"
+
 
 // Импорт компонентов
-import MyTodoList from '../MyTodoList/MyTodoList'
-import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
+import ApplicationWrapper from './ApplicationWrapper/ApplicationWrapper'
+import ProjectContent from '../ProjectContent/ProjectContent'
+// import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -11,16 +15,18 @@ import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
 import projects from '../ProjectsData/projectsData'
 import normalizeState from '../ProjectsData/stateNormalizer'
 
-import classes from './App.scss'
-import classnames from "classnames/bind"
-const cx = classnames.bind(classes)
+// import classes from './App.scss'
+// import classnames from "classnames/bind"
+// const cx = classnames.bind(classes)
 
+// Функция нормализует "стейт" (файл projects со вложенной структорой) и вернет на выходе объект со вложенными projectsById и tasksById
 const {projectsById, tasksById} = normalizeState(projects)
 
 class App extends React.Component {
   state = {
     theme: DEFAULT_THEME,
-    projectsById,
+    // нормализуем стейт, записав в него соответствующие выводы функции normalizeState
+    projectsById, 
     tasksById
   };
 
@@ -64,22 +70,25 @@ class App extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
-        <div className={cx('tasks-wrapper__layout')}>
-          <ThemeContext.Provider value={this.state.theme}>
-            <>
-              <ThemeSwitcher
-                  themeChangeHadnler={this.themeChangeHadnler}
-              />
-              <MyTodoList 
-                  tasks={this.state.tasks}
-                  submitHandler={this.submitHandler}
-                  handleTaskStatus={this.handleTaskStatus}
-              />
-            </>
-          </ThemeContext.Provider>
-        </div>
-      </section>
+      <BrowserRouter>
+        <ThemeContext.Provider value={this.state.theme}>
+            <ApplicationWrapper themeChangeHadnler={this.themeChangeHadnler}>
+
+            </ApplicationWrapper>
+          {/* <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
+                <>
+                  <ThemeSwitcher
+                      themeChangeHadnler={this.themeChangeHadnler}
+                  />
+                  <ProjectContent 
+                      tasks={this.state.tasks}
+                      submitHandler={this.submitHandler}
+                      handleTaskStatus={this.handleTaskStatus}
+                  />
+                </>
+          </section> */}
+        </ThemeContext.Provider>
+      </BrowserRouter>
     )
   }
 }
