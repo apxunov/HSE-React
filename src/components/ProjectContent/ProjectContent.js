@@ -12,7 +12,7 @@ const cx = classnames.bind(classes)
 class ProjectContent extends React.Component {
   render() {
     const tasks = this.props.tasks
-
+    
     return (
       <div className={cx('tasks-wrapper__layout')}>
         <TaskAdd

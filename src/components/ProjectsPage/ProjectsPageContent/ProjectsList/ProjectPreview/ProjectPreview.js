@@ -17,7 +17,7 @@ const ProjectPreview = ({name, description, tasksNum}) => {
                     <h2>{name}</h2>
                     {tasksNum 
                         ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
-                        : <p>{description}</p>}
+                        : <p>{description}. <br/> Has no tasks yet</p>}
                 </div>
             )
         }}

@@ -5,10 +5,12 @@ import { BrowserRouter, Route} from "react-router-dom"
 
 
 // Импорт компонентов
-import ApplicationWrapper from './ApplicationWrapper/ApplicationWrapper'
+
 // import ProjectContent from '../ProjectContent/ProjectContent'
 // import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
+//import ProjectContent from '../ProjectContent/ProjectContent'
+import ProjectPage from '../ProjectContent/ProjectPage'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -102,13 +104,12 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.projectsById);
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
-          {/* <ApplicationWrapper> */}
             <Route exact path='/'></Route>
-          
-            <Route path='/projects'>
+            <Route exact path='/projects'>
                 <ProjectsPage 
                   projectsById={this.state.projectsById} 
                   tasksById={this.state.tasksById}
@@ -116,7 +117,15 @@ class App extends React.Component {
                   onProjectAddHandler={this.onProjectAddHandler}
                 />
             </Route>
-          {/* </ApplicationWrapper> */}
+            <Route exact path='/projects/:projectId'>
+                <ProjectPage
+                  submitHandler={this.submitHandler}
+                  handleTaskStatus={this.handleTaskStatus}
+                  projectsById={this.state.projectsById} 
+                  tasksById={this.state.tasksById}
+                  // tasks={this.getProjectTasks()}
+                />
+            </Route>
             
           {/* <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
                 <>
