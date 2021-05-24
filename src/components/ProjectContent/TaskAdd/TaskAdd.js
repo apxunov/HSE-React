@@ -12,7 +12,7 @@ import classes from '../TaskList/Task/Task.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const TaskAdd = ({submitHandler, projectId}) => {
+const TaskAdd = ({taskAddHandler, projectId}) => {
     return (
         <ThemeContext>
             {theme => (
@@ -20,7 +20,7 @@ const TaskAdd = ({submitHandler, projectId}) => {
                     <h2>Create new task</h2>
                     <TaskInput
                         projectId={projectId}
-                        onSubmitHandler={submitHandler}
+                        taskAddHandler={taskAddHandler}
                     />
                 </div>
             )}

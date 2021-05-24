@@ -34,19 +34,20 @@ class App extends React.Component {
   };
 
   // Смена статуса таски completed: done / undone
-  handleTaskStatus = (taskID) => {
-    const taskToChange_id = this.state.tasks.findIndex((task) => task.id === taskID); // находим id таски, которую нужно изменить 
-    this.setState((currentState) => {
-      const newTasksList = [...currentState.tasks] // дублируем стейт
-      newTasksList[taskToChange_id] = { ...newTasksList[taskToChange_id], completed: !currentState.tasks[taskToChange_id].completed } // инвертируем булевое значение
-      return {
-        tasks: newTasksList // сетим новым стейт
-      }
-    })
+  changeTaskStatusHandler = (taskId) => {
+    const taskToChange = this.state.tasksById[taskId]
+    const taskToChange_updatedStatus = { ...taskToChange, completed: !taskToChange.completed }
+
+    this.setState( (currentState) => ({
+        tasksById: {
+          ...currentState.tasksById, 
+          [taskId]: taskToChange_updatedStatus
+        }
+    }))
   }
 
   // Добавление таски
-  submitHandler = (projectId, taskName, taskDescription) => {
+  taskAddHandler = (projectId, taskName, taskDescription) => {
     taskName&&taskDescription 
     ? this.setState( (currentState) => {
       const projectTasksIdsList = [...currentState.projectsById[projectId].tasksIds]
@@ -141,8 +142,8 @@ class App extends React.Component {
             </Route>
             <Route exact path='/projects/:projectId'>
                 <ProjectPage
-                  submitHandler={this.submitHandler}
-                  handleTaskStatus={this.handleTaskStatus}
+                  taskAddHandler={this.taskAddHandler}
+                  changeTaskStatusHandler={this.changeTaskStatusHandler}
                   projectsById={this.state.projectsById} 
                   tasksById={this.state.tasksById}
                   // tasks={this.getProjectTasks()}
@@ -156,8 +157,8 @@ class App extends React.Component {
                   />
                   <ProjectContent 
                       tasks={this.state.tasks}
-                      submitHandler={this.submitHandler}
-                      handleTaskStatus={this.handleTaskStatus}
+                      taskAddHandler={this.taskAddHandler}
+                      changeTaskStatusHandler={this.changeTaskStatusHandler}
                   />
                 </>
           </section> */}

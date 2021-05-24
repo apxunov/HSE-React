@@ -16,7 +16,7 @@ class TaskInput extends React.Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
-      return this.props.onSubmitHandler(this.props.projectId, this.state.taskName, this.state.taskDescription)
+      return this.props.taskAddHandler(this.props.projectId, this.state.taskName, this.state.taskDescription)
     }
   
     render() {
