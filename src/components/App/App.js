@@ -1,12 +1,13 @@
 import React from 'react'
 import '../App/App.scss';
-import { BrowserRouter, Route} from "react-router-dom"
+import { BrowserRouter, Route, Switch} from "react-router-dom"
 
 
 // Импорт компонентов
 import HomePage from './HomePage/HomePage'
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
 import ProjectPage from '../ProjectPage/ProjectPage'
+import PageNotFound from './PageNotFound/PageNotFound'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -125,6 +126,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
+          <Switch>
             <Route exact path='/'>
               <HomePage themeChangeHadnler={this.themeChangeHadnler}/>
             </Route>
@@ -145,6 +147,10 @@ class App extends React.Component {
                   themeChangeHadnler={this.themeChangeHadnler}
                 />
             </Route>
+            <Route>
+              <PageNotFound themeChangeHadnler={this.themeChangeHadnler}/>
+            </Route>
+          </Switch>
         </ThemeContext.Provider>
       </BrowserRouter>
     )

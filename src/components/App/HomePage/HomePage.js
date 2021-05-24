@@ -18,7 +18,7 @@ const HomePage = ({themeChangeHadnler}) => {
                     <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
                         <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
                         <div className={cx('homepage_backgroud', `homepage_backgroud-${theme}`)}>
-                            <h1>You're on main page</h1>
+                            <h1>You're on the main page</h1>
                             <p>By clicking the button below you will be redirected to projects' page</p>
                             <Link to='/projects/' style={{ textDecoration: 'none' }}>
                                 <Button btnName={'Enter'}/>
