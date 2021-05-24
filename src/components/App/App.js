@@ -46,22 +46,48 @@ class App extends React.Component {
   }
 
   // Добавление таски
-  submitHandler = (name, value) => {
-    name&&value ? this.setState( (currentState) => { // если поля desription и name заполнены.. 
-      const newTasksList = [...currentState.tasks] // дублируем таски из стейта
-      const tasksLastID = newTasksList.length // присвоем IDшник новой таске = +1 к последнему таскID из стейта
-      newTasksList[tasksLastID] = { // если name и desciption заполнены..
-        id: tasksLastID+1, // то творим новый объект для нового таска
-        name: name,
-        description: value,
+  submitHandler = (projectId, taskName, taskDescription) => {
+    taskName&&taskDescription 
+    ? this.setState( (currentState) => {
+      const projectTasksIdsList = [...currentState.projectsById[projectId].tasksIds]
+      const tasksList = {...currentState.tasksById};
+      
+      // Ставим новой таске Id последней +1
+      function getLastId(tasks) {
+        let lastId = 0
+        for (let task in tasks) {
+          if (lastId <= task) {
+            lastId++
+          } else {return lastId}
+        }
+        return lastId
+      }
+
+      const lastTask_id = getLastId(tasksList)
+      const newTask_id = lastTask_id+1
+      const projectNewTask_id = getLastId(projectTasksIdsList)
+
+      // новый ProjectsByIds
+      projectTasksIdsList[projectNewTask_id] = newTask_id
+
+      // новый TasksByIds
+      tasksList[newTask_id] = {
+        id: newTask_id,
+        name: taskName,
+        description: taskDescription,
         completed: false
-      } 
+      }
 
       return {
-        tasks: newTasksList //.. то обновляем стейт
+        projectsById: { // соответсвующему проекту присваиваем новый массив айдишников тасок
+          ...currentState.projectsById,
+          [projectId]: { tasksIds: projectTasksIdsList}
+        },
+        tasksById: tasksList // обновляем массив айдишников всех тасок
       }
-    })
-    : alert('Enter name and description!') // ..а если пусты, то алёртим пользователя, чтобы тот внес данные
+      
+    } )
+    : alert('Enter NEW TASK name and description')
   }
 
   // Смена темы
@@ -72,13 +98,10 @@ class App extends React.Component {
 
   // Создавние нового проекта
   onProjectAddHandler = (projectName, projectDescription) => {
-    console.log(projectName, projectDescription);
-
     // Новый проект будет иметь Id последнего +1
     function setNewProjectId(projects) {
       let lastId = 0
       for (let projectId in projects) {
-        console.log(projectId);
         if (lastId <= projectId) {
           lastId++
         } else {return ++lastId}
@@ -104,7 +127,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.projectsById);
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>

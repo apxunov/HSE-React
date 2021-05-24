@@ -12,10 +12,12 @@ const cx = classnames.bind(classes)
 class ProjectContent extends React.Component {
   render() {
     const tasks = this.props.tasks
+    const projectId = this.props.projectId
     
     return (
       <div className={cx('tasks-wrapper__layout')}>
         <TaskAdd
+            projectId={projectId}
             submitHandler={this.props.submitHandler}
         />
         <TaskList

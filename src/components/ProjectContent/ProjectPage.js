@@ -9,10 +9,9 @@ const ProjectPage = ({projectsById, tasksById, submitHandler, handleTaskStatus})
     const { tasksIds } = project
     const tasks = tasksIds.map( taskId => tasksById[taskId] )
 
-    console.log('vot on', tasksById);
-
     return (
         <ProjectContent
+            projectId={projectId}
             tasks={tasks}
             submitHandler={submitHandler}
             handleTaskStatus={handleTaskStatus}

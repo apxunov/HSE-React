@@ -12,13 +12,14 @@ import classes from '../TaskList/Task/Task.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const TaskAdd = ({submitHandler}) => {
+const TaskAdd = ({submitHandler, projectId}) => {
     return (
         <ThemeContext>
             {theme => (
                 <div className={cx("task", `task-theme-${theme}`)}>
                     <h2>Create new task</h2>
                     <TaskInput
+                        projectId={projectId}
                         onSubmitHandler={submitHandler}
                     />
                 </div>
