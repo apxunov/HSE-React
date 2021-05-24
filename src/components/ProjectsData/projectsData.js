@@ -45,7 +45,7 @@ const projects = [
           id: 6,
           name: 'IT-infrastructure',
           description: '5th Lab. 23:59 LMS May 26',
-          completed: true
+          completed: false
         },
         {
           id: 7,
@@ -63,7 +63,7 @@ const projects = [
           id: 9,
           name: 'ImProfEdu',
           description: '5th HW – take a video',
-          completed: true
+          completed: false
         }
       ]
     }

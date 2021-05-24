@@ -1,15 +1,11 @@
 import React from 'react'
 import '../App/App.scss';
-// import { BrowserRouter, Switch, Route, Link, Redirect, withRouter } from "react-router-dom"
 import { BrowserRouter, Route} from "react-router-dom"
 
 
 // Импорт компонентов
-
-// import ProjectContent from '../ProjectContent/ProjectContent'
-// import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
+// import HomePage
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
-//import ProjectContent from '../ProjectContent/ProjectContent'
 import ProjectPage from '../ProjectPage/ProjectPage'
 
 // Импорт контекста
@@ -17,10 +13,6 @@ import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
 
 import projects from '../ProjectsData/projectsData'
 import normalizeState from '../ProjectsData/stateNormalizer'
-
-// import classes from './App.scss'
-// import classnames from "classnames/bind"
-// const cx = classnames.bind(classes)
 
 // Функция нормализует "стейт" (файл projects со вложенной структорой) и вернет на выходе объект со вложенными projectsById и tasksById
 const {projectsById, tasksById} = normalizeState(projects)
@@ -133,7 +125,9 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
-            <Route exact path='/'></Route>
+            <Route exact path='/'>
+              {/* <HomePage/> */}
+            </Route>
             <Route exact path='/projects'>
                 <ProjectsPage 
                   projectsById={this.state.projectsById} 
@@ -151,19 +145,6 @@ class App extends React.Component {
                   themeChangeHadnler={this.themeChangeHadnler}
                 />
             </Route>
-            
-          {/* <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
-                <>
-                  <ThemeSwitcher
-                      themeChangeHadnler={this.themeChangeHadnler}
-                  />
-                  <ProjectContent 
-                      tasks={this.state.tasks}
-                      taskAddHandler={this.taskAddHandler}
-                      changeTaskStatusHandler={this.changeTaskStatusHandler}
-                  />
-                </>
-          </section> */}
         </ThemeContext.Provider>
       </BrowserRouter>
     )

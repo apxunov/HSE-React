@@ -12,7 +12,7 @@ const BackButton = () => {
     return (
         <button onClick={history.goBack} className={cx('backbutton-wrapper')}>
             <span className={cx('backbutton-arrow')}></span>
-            <span className={cx('backbutton-text')}>BACK</span>
+            <span className={cx('backbutton-text')}>GO BACK</span>
         </button>
     )
 }
