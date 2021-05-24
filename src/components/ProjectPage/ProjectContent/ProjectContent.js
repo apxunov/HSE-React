@@ -18,7 +18,10 @@ class ProjectContent extends React.Component {
     
     return (
       <> 
-        <ProjectHeader projectName={projectName}/>
+        <ProjectHeader 
+          projectName={projectName}
+          numberOfTasks={tasks?.length}
+        />
         <div className={cx('tasks-wrapper__layout')}>
           <TaskAdd
               projectId={projectId}
