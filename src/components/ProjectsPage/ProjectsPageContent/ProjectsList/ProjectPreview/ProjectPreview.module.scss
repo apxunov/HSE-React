@@ -5,12 +5,6 @@
 $project-LightMode-BgColor: #fff;
 $project-DarkMode-BgColor: #252525;
 
-.project-wrapper {
-    margin: 0px 1rem;
-    min-width: 300px;
-    width: auto;
-}
-
 .project {
     // Базовые стили
     position: relative;
@@ -24,7 +18,7 @@ $project-DarkMode-BgColor: #252525;
     height: fit-content;
 
     padding: 1.5rem 3rem;
-    margin: 1rem 0px;
+    margin: 1rem;
 
     border-radius: 20px;
 
@@ -88,8 +82,8 @@ $project-DarkMode-BgColor: #252525;
 
 .project-add {
     margin: 1rem;
-    min-width: 360px;
-    max-width: 400px;
+    min-width: 400px;
+    max-width: 600px;
 }
 
 @media (max-width: 1200px) {

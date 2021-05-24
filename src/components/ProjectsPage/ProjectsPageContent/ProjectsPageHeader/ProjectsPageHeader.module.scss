@@ -1,0 +1,25 @@
+@import '../../../UI/globalStyleVariables/global.scss';
+
+.projects-page__header-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 80vw;
+    max-width: 1440px;
+    margin: auto auto 3rem;
+
+    * {
+        margin-left: 1rem; // потому что у projects DIVов 1rem марджины
+    }
+    
+    h1 {
+        font-size: 80px;
+        font-weight: 700;
+        color: $light-color;
+    }
+    p {
+        color: $text-color;
+    }
+}

@@ -18,7 +18,7 @@ const ProjectsList = ({projectsById}) => {
     
     return projectsArray.map( (project) => {
         return(
-            <Link to={`/projects/${project.id}`}>
+            <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
                 <ProjectPreview
                     id={project.id}
                     name={project.name}

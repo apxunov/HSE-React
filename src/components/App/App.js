@@ -82,7 +82,9 @@ class App extends React.Component {
       return {
         projectsById: { // соответсвующему проекту присваиваем новый массив айдишников тасок
           ...currentState.projectsById,
-          [projectId]: { tasksIds: projectTasksIdsList}
+          [projectId]: { ...currentState.projectsById[projectId], 
+              tasksIds: projectTasksIdsList
+          }
         },
         tasksById: tasksList // обновляем массив айдишников всех тасок
       }
