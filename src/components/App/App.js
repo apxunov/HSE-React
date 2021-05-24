@@ -10,7 +10,7 @@ import { BrowserRouter, Route} from "react-router-dom"
 // import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
 //import ProjectContent from '../ProjectContent/ProjectContent'
-import ProjectPage from '../ProjectContent/ProjectPage'
+import ProjectPage from '../ProjectPage/ProjectPage'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
@@ -118,7 +118,7 @@ class App extends React.Component {
           id: projectToBeAddedID,
           name: projectName,
           description: projectDescription,
-          tasks: []
+          tasksIds: []
         }
         return {
           projectsById: newProjectsList
@@ -142,11 +142,11 @@ class App extends React.Component {
             </Route>
             <Route exact path='/projects/:projectId'>
                 <ProjectPage
-                  taskAddHandler={this.taskAddHandler}
-                  changeTaskStatusHandler={this.changeTaskStatusHandler}
                   projectsById={this.state.projectsById} 
                   tasksById={this.state.tasksById}
-                  // tasks={this.getProjectTasks()}
+                  taskAddHandler={this.taskAddHandler}
+                  changeTaskStatusHandler={this.changeTaskStatusHandler}
+                  themeChangeHadnler={this.themeChangeHadnler}
                 />
             </Route>
             

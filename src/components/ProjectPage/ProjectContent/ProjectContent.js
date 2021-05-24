@@ -1,6 +1,7 @@
 import React from 'react'
 
 // Импорт компонентов
+import ProjectHeader from './ProjectHeader/ProjectHeader'
 import TaskList from './TaskList/TaskList'
 import TaskAdd from './TaskAdd/TaskAdd';
 
@@ -15,6 +16,8 @@ class ProjectContent extends React.Component {
     const projectId = this.props.projectId
     
     return (
+      <> 
+      <ProjectHeader projectName={this.props.projectName}/>
       <div className={cx('tasks-wrapper__layout')}>
         <TaskAdd
             projectId={projectId}
@@ -25,6 +28,7 @@ class ProjectContent extends React.Component {
             onClick={this.props.changeTaskStatusHandler}
         />
       </div>
+      </>
     )    
   }
 }

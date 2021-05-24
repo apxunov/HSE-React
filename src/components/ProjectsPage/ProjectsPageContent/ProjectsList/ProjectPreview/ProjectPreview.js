@@ -9,16 +9,18 @@ import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
 
-const ProjectPreview = ({name, description, tasksNum}) => {
+const ProjectPreview = ({id, name, description, tasksNum}) => {
     return (<ThemeContext.Consumer>
         {theme => {
             return (
-                <div className={cx('project', `project-theme-${theme}`)}>
-                    <h2>{name}</h2>
-                    {tasksNum 
-                        ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
-                        : <p>{description}. <br/> Has no tasks yet</p>}
-                </div>
+                <a href={`projects/${id}`} className={cx('project-wrapper')}>
+                    <div id={`project#${id}`} className={cx('project', `project-theme-${theme}`)}>
+                        <h2>{name}</h2>
+                        {tasksNum 
+                            ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
+                            : <p>{description}. <br/> Has no tasks yet</p>}
+                    </div>
+                </a>
             )
         }}
     </ThemeContext.Consumer>)

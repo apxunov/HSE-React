@@ -5,20 +5,26 @@
 $project-LightMode-BgColor: #fff;
 $project-DarkMode-BgColor: #252525;
 
+.project-wrapper {
+    margin: 0px 1rem;
+    min-width: 300px;
+    width: auto;
+}
+
 .project {
     // Базовые стили
     position: relative;
     cursor: pointer;
 
-    flex: 1;
-    flex-basis: 30%;
-
-    height: fit-content;
+    flex-basis: 25%;
+    
+    min-width: 300px;
     width: auto;
-    max-width: 30%;
+    max-width: 400px;
+    height: fit-content;
 
-    margin: 1rem;
     padding: 1.5rem 3rem;
+    margin: 1rem 0px;
 
     border-radius: 20px;
 
@@ -79,9 +85,15 @@ $project-DarkMode-BgColor: #252525;
         }
     }
 }
-   
+
+.project-add {
+    margin: 1rem;
+    min-width: 360px;
+    max-width: 400px;
+}
+
 @media (max-width: 1200px) {
     .project {
-        max-width: 50%;
+        min-width: 400px;
     }
 }

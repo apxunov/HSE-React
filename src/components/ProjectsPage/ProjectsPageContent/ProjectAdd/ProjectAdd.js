@@ -18,7 +18,7 @@ const ProjectAdd = ({onProjectAddHandler}) => {
         <ThemeContext.Consumer>
             {theme => {
                 return (
-                    <div className={cx("project", `project-theme-${theme}`)}>
+                    <div className={cx("project-add", "project", `project-theme-${theme}`)}>
                         <h2>Create new project</h2>
                         <ProjectInput 
                             onProjectAddHandler={onProjectAddHandler}

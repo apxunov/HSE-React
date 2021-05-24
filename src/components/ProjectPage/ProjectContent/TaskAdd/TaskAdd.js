@@ -4,7 +4,7 @@ import React from 'react'
 import TaskInput from './TaskInput/TaskInput'
 
 // Импорт контекста 
-import { ThemeContext } from '../../App/ThemeContext'
+import { ThemeContext } from '../../../App/ThemeContext'
 
 // Импорт стилей
 import './TaskAdd.module.scss';
