@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 
 import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
 import ProjectContent from './ProjectContent/ProjectContent'
+import BackButton from '../UI/BackButton/BackButton'
 
 import {ThemeContext} from '../App/ThemeContext'
 
@@ -22,6 +23,7 @@ const ProjectPage = ({projectsById, tasksById, taskAddHandler, changeTaskStatusH
             {theme => {
                 return (
                     <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
+                        <BackButton/>
                     <> 
                         <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
                         <ProjectContent

@@ -14,7 +14,6 @@ const Button = (props) => {
         <ThemeContext.Consumer>
             {theme => (
                  <button 
-                 // className={classes.btn} 
                  className={cx('btn', `btn-theme-${theme}`)}
                  onClick={props.onClick}
                  type={props.type}
