@@ -14,20 +14,21 @@ class ProjectContent extends React.Component {
   render() {
     const tasks = this.props.tasks
     const projectId = this.props.projectId
+    const projectName = this.props.projectName
     
     return (
       <> 
-      <ProjectHeader projectName={this.props.projectName}/>
-      <div className={cx('tasks-wrapper__layout')}>
-        <TaskAdd
-            projectId={projectId}
-            taskAddHandler={this.props.taskAddHandler}
-        />
-        <TaskList
-            tasksList={tasks}
-            onClick={this.props.changeTaskStatusHandler}
-        />
-      </div>
+        <ProjectHeader projectName={projectName}/>
+        <div className={cx('tasks-wrapper__layout')}>
+          <TaskAdd
+              projectId={projectId}
+              taskAddHandler={this.props.taskAddHandler}
+          />
+          <TaskList
+              tasksList={tasks}
+              onClick={this.props.changeTaskStatusHandler}
+          />
+        </div>
       </>
     )    
   }

@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 import ProjectPreview from './ProjectPreview/ProjectPreview'
 
 const ProjectsList = ({projectsById}) => {
@@ -16,12 +18,14 @@ const ProjectsList = ({projectsById}) => {
     
     return projectsArray.map( (project) => {
         return(
-            <ProjectPreview
-                id={project.id}
-                name={project.name}
-                description={project.description}
-                tasksNum={project.tasksNum}
-            />
+            <Link to={`/projects/${project.id}`}>
+                <ProjectPreview
+                    id={project.id}
+                    name={project.name}
+                    description={project.description}
+                    tasksNum={project.tasksNum}
+                />
+            </Link>
         )
     })
 }
