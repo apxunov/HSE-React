@@ -4,7 +4,7 @@ import { BrowserRouter, Route} from "react-router-dom"
 
 
 // Импорт компонентов
-// import HomePage
+import HomePage from './HomePage/HomePage'
 import ProjectsPage from '../ProjectsPage/ProjectsPage'
 import ProjectPage from '../ProjectPage/ProjectPage'
 
@@ -126,7 +126,7 @@ class App extends React.Component {
       <BrowserRouter>
         <ThemeContext.Provider value={this.state.theme}>
             <Route exact path='/'>
-              {/* <HomePage/> */}
+              <HomePage themeChangeHadnler={this.themeChangeHadnler}/>
             </Route>
             <Route exact path='/projects'>
                 <ProjectsPage 

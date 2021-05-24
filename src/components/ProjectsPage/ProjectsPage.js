@@ -2,6 +2,7 @@ import React from 'react'
 
 import ProjectPageContent from './ProjectsPageContent/ProjectsPageContent'
 import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
+import BackButton from '../UI/BackButton/BackButton'
 
 import {ThemeContext} from '../App/ThemeContext'
 
@@ -15,6 +16,7 @@ const ProjectsPage = ({projectsById, tasksById, themeChangeHadnler, onProjectAdd
         {theme => {
             return (
                 <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
+                    <BackButton/>
                     <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
                     <ProjectPageContent 
                         projectsById={projectsById}
