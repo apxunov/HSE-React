@@ -21,6 +21,7 @@ const {projectsById, tasksById} = normalizeState(projects)
 class App extends React.Component {
   state = {
     theme: DEFAULT_THEME,
+    themeTurnedToDark: false,
     // нормализуем стейт, записав в него соответствующие выводы функции normalizeState
     projectsById, 
     tasksById
@@ -87,9 +88,12 @@ class App extends React.Component {
   }
 
   // Смена темы
-  themeChangeHadnler = (event) => {
+  themeChangeHandler = (event) => {
     const themeMode = event.target.checked ? 'dark' : 'light'
-    this.setState( {theme: themeMode} )
+    this.setState( {theme: themeMode, themeTurnedToDark: !this.state.themeTurnedToDark} )
+    // if (themeMode === 'dark') {
+    //   this.setState({themeTurnedToDark: true})
+    // }
   }
 
   // Создавние нового проекта
@@ -128,14 +132,18 @@ class App extends React.Component {
         <ThemeContext.Provider value={this.state.theme}>
           <Switch>
             <Route exact path='/'>
-              <HomePage themeChangeHadnler={this.themeChangeHadnler}/>
+              <HomePage 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
+              />
             </Route>
             <Route exact path='/projects'>
                 <ProjectsPage 
                   projectsById={this.state.projectsById} 
                   tasksById={this.state.tasksById}
-                  themeChangeHadnler={this.themeChangeHadnler}
+                  themeChangeHandler={this.themeChangeHandler}
                   onProjectAddHandler={this.onProjectAddHandler}
+                  themeTurnedToDark={this.state.themeTurnedToDark}
                 />
             </Route>
             <Route exact path='/projects/:projectId'>
@@ -144,14 +152,21 @@ class App extends React.Component {
                   tasksById={this.state.tasksById}
                   taskAddHandler={this.taskAddHandler}
                   changeTaskStatusHandler={this.changeTaskStatusHandler}
-                  themeChangeHadnler={this.themeChangeHadnler}
+                  themeChangeHandler={this.themeChangeHandler}
+                  themeTurnedToDark={this.state.themeTurnedToDark}
                 />
             </Route>
             <Route>
-              <PageNotFound themeChangeHadnler={this.themeChangeHadnler}/>
+              <PageNotFound 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
+              />
             </Route>
             <Route exact path='/404'>
-              <PageNotFound themeChangeHadnler={this.themeChangeHadnler}/>
+              <PageNotFound 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
+              />
             </Route>
           </Switch>
         </ThemeContext.Provider>

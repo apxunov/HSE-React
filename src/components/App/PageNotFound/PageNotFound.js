@@ -8,13 +8,16 @@ import classes from './PageNotFound.module.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(classes)
 
-const PageNotFound = ({themeChangeHadnler}) => {
+const PageNotFound = ({themeChangeHandler, themeTurnedToDark}) => {
     return (
         <ThemeContext.Consumer>
         {theme => {
             return (
                 <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
-                    <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
+                    <ThemeSwitcher 
+                        themeChangeHandler={themeChangeHandler}
+                        themeTurnedToDark={themeTurnedToDark}
+                    />
                     <div className={cx('notfound-wrapper')}>
                         <h1>404</h1>
                         <h2>Page not found. Click the button below to get to the projects page</h2>

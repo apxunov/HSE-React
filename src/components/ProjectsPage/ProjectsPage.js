@@ -10,14 +10,14 @@ import classes from './ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const ProjectsPage = ({projectsById, tasksById, themeChangeHadnler, onProjectAddHandler}) => {
+const ProjectsPage = ({projectsById, tasksById, themeChangeHandler, onProjectAddHandler, ...args}) => {
     return (
         <ThemeContext.Consumer>
         {theme => {
             return (
                 <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
                     <BackButton/>
-                    <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
+                    <ThemeSwitcher themeChangeHandler={themeChangeHandler} themeTurnedToDark={args.themeTurnedToDark}/>
                     <ProjectPageContent 
                         projectsById={projectsById}
                         tasksById={tasksById}

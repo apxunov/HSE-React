@@ -11,7 +11,7 @@ import classes from '../ProjectsPage/ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const ProjectPage = ({projectsById, tasksById, taskAddHandler, changeTaskStatusHandler, themeChangeHadnler}) => {
+const ProjectPage = ({projectsById, tasksById, taskAddHandler, changeTaskStatusHandler, themeChangeHandler, ...args}) => {
     const { projectId } = useParams() // получаем id проекта из URL
     const project = projectsById[projectId]
     const projectName = project?.name
@@ -25,7 +25,10 @@ const ProjectPage = ({projectsById, tasksById, taskAddHandler, changeTaskStatusH
                     <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
                         <BackButton/>
                     <> 
-                        <ThemeSwitcher themeChangeHadnler={themeChangeHadnler}/>
+                        <ThemeSwitcher 
+                            themeChangeHandler={themeChangeHandler}
+                            themeTurnedToDark={args.themeTurnedToDark}
+                        />
                         <ProjectContent
                             projectId={projectId}
                             projectName={projectName}
