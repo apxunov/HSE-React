@@ -1,0 +1,44 @@
+@import '../globalStyleVariables/global.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  color: rgba(80, 80, 95, 1);
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+div#root {
+  height: 100%;
+  width: 100%;
+}
+
+.application-wrapper {
+  min-height: 100vh;
+  &-theme-light {
+    background: $page-BackgroundColor-light;
+  }
+  &-theme-dark {
+    background: $page-BackgroundColor-dark;
+  }
+}
+
+.tasks-wrapper__layout {
+  max-width: 1440px;
+  width: 80vw;
+
+  margin: auto auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
