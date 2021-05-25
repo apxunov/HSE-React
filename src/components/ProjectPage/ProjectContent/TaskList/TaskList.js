@@ -1,5 +1,7 @@
 import React from 'react'
 import Task from './Task/Task'
+import {Redirect} from 'react-router-dom'
+// import PageNotFound from '../../../App/PageNotFound/PageNotFound'
 
 const TaskList = ( {tasksList, onClick} ) => {
     if (tasksList) {
@@ -19,7 +21,7 @@ const TaskList = ( {tasksList, onClick} ) => {
         )
     }
     else {
-        return (<h1>Currently this project has no tasks</h1>)
+        return (<Redirect to='/404'/>)
     }
 }
 

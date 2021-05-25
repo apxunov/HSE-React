@@ -150,6 +150,9 @@ class App extends React.Component {
             <Route>
               <PageNotFound themeChangeHadnler={this.themeChangeHadnler}/>
             </Route>
+            <Route exact path='/404'>
+              <PageNotFound themeChangeHadnler={this.themeChangeHadnler}/>
+            </Route>
           </Switch>
         </ThemeContext.Provider>
       </BrowserRouter>
