@@ -4,19 +4,23 @@ import {Link} from 'react-router-dom'
 import ProjectPreview from './ProjectPreview/ProjectPreview'
 
 const ProjectsList = ({projectsById}) => {
-    const projectsArray = []
-    for (let projectId in projectsById) {
-        const project = projectsById[projectId]
-        console.log(project);
-        projectsArray.push({
-            id: project.id,
-            name: project.name,
-            description: project.description,
-            tasksNum: project.tasksIds?.length
-        })
-    }
+    // const projectsArray = []
+
+    // Object.values(projectsById).map( project =>  {
+
+    // })
+
+    // for (let projectId in projectsById) {
+    //     const project = projectsById[projectId]
+    //     projectsArray.push({
+    //         id: project.id,
+    //         name: project.name,
+    //         description: project.description,
+    //         tasksNum: project.tasksIds?.length
+    //     })
+    // }
     
-    return projectsArray.map( (project) => {
+    return Object.values(projectsById).map( (project) => {
         return(
             <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
                 <ProjectPreview
