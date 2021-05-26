@@ -3,8 +3,6 @@ import classes from './TextInput.module.scss'
 
 const TextInput = ({ name, placeholder, size, isRequired, onChange }) => {
     return (
-        isRequired 
-        ? 
           <label className={classes['custom-field']} htmlFor={`${name}_input`}>
             <input className={classes['text-input']}
                 id={`${name}_input`} 
@@ -12,19 +10,8 @@ const TextInput = ({ name, placeholder, size, isRequired, onChange }) => {
                 type='text' 
                 placeholder={`${placeholder}`} 
                 size={size} 
-                required 
+                required={isRequired} 
                 onChange={onChange}/> 
-            <span className={classes['input-placeholder']}>{placeholder}</span>
-          </label>
-        : 
-          <label className={classes['custom-field']} htmlFor={`${name}_input`}>
-            <input className={classes['text-input']}
-                id={`${name}_input`} 
-                name={name} 
-                type='text' 
-                placeholder={`${placeholder}`} 
-                size={size}  
-                onChange={onChange}/>
             <span className={classes['input-placeholder']}>{placeholder}</span>
           </label>
     )

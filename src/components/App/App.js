@@ -91,9 +91,6 @@ class App extends React.Component {
   themeChangeHandler = (event) => {
     const themeMode = event.target.checked ? 'dark' : 'light'
     this.setState( {theme: themeMode, themeTurnedToDark: !this.state.themeTurnedToDark} )
-    // if (themeMode === 'dark') {
-    //   this.setState({themeTurnedToDark: true})
-    // }
   }
 
   // Создавние нового проекта
