@@ -9,14 +9,17 @@ import cls from './HomePage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(cls)
 
-const HomePage = ({themeChangeHandler}) => {
+const HomePage = ({themeChangeHandler, themeTurnedToDark}) => {
     return (
         <ThemeContext.Consumer>
             {theme => {
                 return (
                     <>
                     <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
-                        <ThemeSwitcher themeChangeHandler={themeChangeHandler}/>
+                        <ThemeSwitcher 
+                            themeChangeHandler={themeChangeHandler}
+                            themeTurnedToDark={themeTurnedToDark}
+                        />
                         <div className={cx('homepage_backgroud', `homepage_backgroud-${theme}`)}>
                             <h1>You're on the main page</h1>
                             <p>By clicking the button below you will be redirected to projects' page</p>
