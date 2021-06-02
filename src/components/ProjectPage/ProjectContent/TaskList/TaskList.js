@@ -1,7 +1,6 @@
 import React from 'react'
-import Task from './Task/Task'
+import {Task} from './Task/Task'
 import {Redirect} from 'react-router-dom'
-// import PageNotFound from '../../../App/PageNotFound/PageNotFound'
 
 const TaskList = ( {tasksList, onClick} ) => {
     if (tasksList) {

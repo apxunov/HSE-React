@@ -1,7 +1,7 @@
 import React from 'react'
 
 import TextInput from '../../../../ProjectPage/ProjectContent/TaskAdd/TaskInput/TextInput/TextInput'
-import Button from '../../../../UI/Button/Button'
+import {Button} from '../../../../UI/Button/Button'
 
 class ProjectInput extends React.Component {
     state = {

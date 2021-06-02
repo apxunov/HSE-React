@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import {ThemeSwitcher} from '../../UI/ThemeSwitcher/ThemeSwitcher'
-import Button from '../../UI/Button/Button'
+import {Button} from '../../UI/Button/Button'
 
 import classes from './PageNotFound.module.scss'
 import classnames from 'classnames/bind'

@@ -1,28 +1,24 @@
 import React from 'react'
-
-// Импорт контекста 
-import { ThemeContext } from "../../App/ThemeContext"
+import {connect} from 'react-redux'
 
 // Импорт стилей
 import classes from './Button.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
+const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
-const Button = (props) => {
+const ButtonComponent = ({theme, ...props}) => {
     return (
-        <ThemeContext.Consumer>
-            {theme => (
-                 <button 
-                 className={cx('btn', `btn-theme-${theme}`)}
-                 onClick={props.onClick}
-                 type={props.type}
-                 >
-                 {props.btnName}
-             </button>
-            )}
-        </ThemeContext.Consumer>
+        <button 
+            className={cx('btn', `btn-theme-${theme}`)}
+            onClick={props.onClick}
+            type={props.type}
+            >
+            {props.btnName}
+        </button>
     )
-  }
+}
+    
 
-export default Button
+export const Button = connect(mapStateToProps)(ButtonComponent)

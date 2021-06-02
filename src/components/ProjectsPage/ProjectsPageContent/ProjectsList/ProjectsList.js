@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import ProjectPreview from './ProjectPreview/ProjectPreview'
+import {ProjectPreview} from './ProjectPreview/ProjectPreview'
 
 const ProjectsList = ({projectsById}) => {    
     return Object.values(projectsById).map( (project) => {

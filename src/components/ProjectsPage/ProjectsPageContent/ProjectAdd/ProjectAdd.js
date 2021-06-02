@@ -1,10 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 // Импорт компонентов 
 import ProjectInput from './ProjectInput/ProjectInput'
-
-// Импорт контекста 
-import { ThemeContext } from '../../../App/ThemeContext'
 
 // Импорт стилей
 import './ProjectAdd.module.scss';
@@ -12,22 +10,17 @@ import classes from '../ProjectsList/ProjectPreview/ProjectPreview.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
+const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
-const ProjectAdd = ({onProjectAddHandler}) => {
+const ProjectAddComponent = ({theme, onProjectAddHandler}) => {
     return(
-        <ThemeContext.Consumer>
-            {theme => {
-                return (
-                    <div className={cx("project-add", "project", `project-theme-${theme}`)}>
-                        <h2>Create new project</h2>
-                        <ProjectInput 
-                            onProjectAddHandler={onProjectAddHandler}
-                        />
-                    </div>
-                )
-            }}
-        </ThemeContext.Consumer>
+        <div className={cx("project-add", "project", `project-theme-${theme}`)}>
+            <h2>Create new project</h2>
+            <ProjectInput 
+                onProjectAddHandler={onProjectAddHandler}
+            />
+        </div>
     )
 }
 
-export default ProjectAdd
+export const ProjectAdd = connect(mapStateToProps)(ProjectAddComponent)

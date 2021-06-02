@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom' // чтобы перенаправить �
 import { connect } from 'react-redux' // чтобы подключить store
 
 import {ThemeSwitcher} from '../../UI/ThemeSwitcher/ThemeSwitcher'
-import Button from '../../UI/Button/Button'
+import {Button} from '../../UI/Button/Button'
 
 import cls from './HomePage.module.scss'
 import classnames from "classnames/bind"

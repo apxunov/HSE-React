@@ -1,27 +1,22 @@
 import React from 'react'
-
-// Импорт контекста 
-import { ThemeContext } from "../../../../App/ThemeContext"
+import {connect} from 'react-redux'
 
 // Импорт стилей
 import classes from './ProjectPreview.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
+const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
-const ProjectPreview = ({id, name, description, tasksNum}) => {
-    return (<ThemeContext.Consumer>
-        {theme => {
-            return (
-                <div id={`project#${id}`} className={cx('project', `project-theme-${theme}`)}>
-                    <h2>{name}</h2>
-                    {tasksNum 
-                        ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
-                        : <p>{description}. <br/> Has no tasks yet.</p>}
-                </div>
-            )
-        }}
-    </ThemeContext.Consumer>)
+const ProjectPreviewComponent = ({theme, id, name, description, tasksNum}) => {
+    return (
+        <div id={`project#${id}`} className={cx('project', `project-theme-${theme}`)}>
+            <h2>{name}</h2>
+            {tasksNum 
+                ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
+                : <p>{description}. <br/> Has no tasks yet.</p>}
+        </div>
+    )
 }
 
-export default ProjectPreview
+export const ProjectPreview = connect(mapStateToProps)(ProjectPreviewComponent)

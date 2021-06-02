@@ -3,7 +3,7 @@ import React from 'react'
 // Импорт компонентов
 import ProjectHeader from './ProjectHeader/ProjectHeader'
 import TaskList from './TaskList/TaskList'
-import TaskAdd from './TaskAdd/TaskAdd';
+import {TaskAdd} from './TaskAdd/TaskAdd';
 
 // Импорт стилей
 import classes from './ProjectContent.module.scss'

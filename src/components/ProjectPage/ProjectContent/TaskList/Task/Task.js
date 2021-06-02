@@ -1,21 +1,18 @@
 import React from 'react'
-
+import {connect} from 'react-redux'
 // Импоррт компонентов
-import Button from '../../../../UI/Button/Button'
-
-// Импорт контекста 
-import { ThemeContext } from "../../../../App/ThemeContext"
+import {Button} from '../../../../UI/Button/Button'
 
 // Импорт стилей
 import classes from './Task.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const Task = ({ id, name, description, completed, onClick }) => {
+const mapStateToProps = (state) => ({theme: state.themeState.theme})
+
+const TaskComponent = ({ theme, id, name, description, completed, onClick }) => {
     const classTaskStatus = completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
     return (
-      <ThemeContext.Consumer>
-        {theme => (
             // в зависимости от темы приложения и completed-статуса таски возвращаем стили
             <div id={id} className={cx('task', `task-theme-${theme}`, `${classTaskStatus}`)}> 
                 <h2>{name}</h2>
@@ -23,8 +20,7 @@ const Task = ({ id, name, description, completed, onClick }) => {
                 { completed ? <Button btnName='Undone' onClick={() => onClick(id)}/> : <Button btnName='Done' onClick={() => onClick(id)}/> }
             </div>
         )}
-      </ThemeContext.Consumer>
-    )}
 
 
-export default Task
+
+export const Task = connect(mapStateToProps)(TaskComponent)
