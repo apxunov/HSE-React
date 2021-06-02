@@ -1,27 +1,29 @@
 import React from 'react'
-import '../App/App.scss';
 import { BrowserRouter, Route, Switch} from "react-router-dom"
-
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 // Импорт компонентов
-import HomePage from './HomePage/HomePage'
-import ProjectsPage from '../ProjectsPage/ProjectsPage'
-import ProjectPage from '../ProjectPage/ProjectPage'
-import PageNotFound from './PageNotFound/PageNotFound'
+import {HomePage} from './HomePage/HomePage'
+import {ProjectsPage} from '../ProjectsPage/ProjectsPage'
+import {ProjectPage} from '../ProjectPage/ProjectPage'
+import {PageNotFound} from './PageNotFound/PageNotFound'
+import { rootReducer } from '../../reducers/index' // Импорт общего reducer'а
 
-// Импорт контекста
-import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
+// Импорт стилей 
+import '../App/App.scss';
 
+// Импорт данных
 import projects from '../ProjectsData/projectsData'
 import normalizeState from '../ProjectsData/stateNormalizer'
-
 // Функция нормализует "стейт" (файл projects со вложенной структорой) и вернет на выходе объект со вложенными projectsById и tasksById
 const {projectsById, tasksById} = normalizeState(projects)
 
+// Инициализация store
+const store = createStore(rootReducer)
+
 class App extends React.Component {
   state = {
-    theme: DEFAULT_THEME,
-    themeTurnedToDark: false,
     // нормализуем стейт, записав в него соответствующие выводы функции normalizeState
     projectsById, 
     tasksById
@@ -87,12 +89,6 @@ class App extends React.Component {
     : alert('Enter NEW TASK name and description')
   }
 
-  // Смена темы
-  themeChangeHandler = (event) => {
-    const themeMode = event.target.checked ? 'dark' : 'light'
-    this.setState( {theme: themeMode, themeTurnedToDark: !this.state.themeTurnedToDark} )
-  }
-
   // Создавние нового проекта
   onProjectAddHandler = (projectName, projectDescription) => {
     // Новый проект будет иметь Id последнего +1
@@ -124,50 +120,38 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('STORE', store.getState());
     return (
-      <BrowserRouter>
-        <ThemeContext.Provider value={this.state.theme}>
-          <Switch>
-            <Route exact path='/'>
-              <HomePage 
-                themeChangeHandler={this.themeChangeHandler}
-                themeTurnedToDark={this.state.themeTurnedToDark}
-              />
-            </Route>
-            <Route exact path='/projects'>
-                <ProjectsPage 
-                  projectsById={this.state.projectsById} 
-                  tasksById={this.state.tasksById}
-                  themeChangeHandler={this.themeChangeHandler}
-                  onProjectAddHandler={this.onProjectAddHandler}
-                  themeTurnedToDark={this.state.themeTurnedToDark}
-                />
-            </Route>
-            <Route exact path='/projects/:projectId'>
-                <ProjectPage
-                  projectsById={this.state.projectsById} 
-                  tasksById={this.state.tasksById}
-                  taskAddHandler={this.taskAddHandler}
-                  changeTaskStatusHandler={this.changeTaskStatusHandler}
-                  themeChangeHandler={this.themeChangeHandler}
-                  themeTurnedToDark={this.state.themeTurnedToDark}
-                />
-            </Route>
-            <Route>
-              <PageNotFound 
-                themeChangeHandler={this.themeChangeHandler}
-                themeTurnedToDark={this.state.themeTurnedToDark}
-              />
-            </Route>
-            <Route exact path='/404'>
-              <PageNotFound 
-                themeChangeHandler={this.themeChangeHandler}
-                themeTurnedToDark={this.state.themeTurnedToDark}
-              />
-            </Route>
-          </Switch>
-        </ThemeContext.Provider>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+            <Switch>
+              <Route exact path='/'>
+                <HomePage/>
+              </Route>
+              <Route exact path='/projects'>
+                  <ProjectsPage 
+                    projectsById={this.state.projectsById} 
+                    tasksById={this.state.tasksById}
+                    onProjectAddHandler={this.onProjectAddHandler}
+                  />
+              </Route>
+              <Route exact path='/projects/:projectId'>
+                  <ProjectPage
+                    projectsById={this.state.projectsById} 
+                    tasksById={this.state.tasksById}
+                    taskAddHandler={this.taskAddHandler}
+                    changeTaskStatusHandler={this.changeTaskStatusHandler}
+                  />
+              </Route>
+              <Route>
+                <PageNotFound/>
+              </Route>
+              <Route exact path='/404'>
+                <PageNotFound/>
+              </Route>
+            </Switch>
+        </BrowserRouter>
+      </Provider>
     )
   }
 }

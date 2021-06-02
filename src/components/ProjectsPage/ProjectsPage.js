@@ -1,33 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux' // чтобы подключить store
 
 import ProjectPageContent from './ProjectsPageContent/ProjectsPageContent'
-import ThemeSwitcher from '../UI/ThemeSwitcher/ThemeSwitcher'
+import {ThemeSwitcher} from '../UI/ThemeSwitcher/ThemeSwitcher'
 import BackButton from '../UI/BackButton/BackButton'
 
-import {ThemeContext} from '../App/ThemeContext'
 
 import classes from './ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const ProjectsPage = ({projectsById, tasksById, themeChangeHandler, onProjectAddHandler, ...args}) => {
+const mapStateToProps = (state) => ({theme: state.themeState.theme}) // из store нам нужна только Тема (light или dark)
+
+const ProjectsPageComponent = ({theme, projectsById, tasksById, onProjectAddHandler}) => {
     return (
-        <ThemeContext.Consumer>
-        {theme => {
-            return (
-                <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
-                    <BackButton/>
-                    <ThemeSwitcher themeChangeHandler={themeChangeHandler} themeTurnedToDark={args.themeTurnedToDark}/>
-                    <ProjectPageContent 
-                        projectsById={projectsById}
-                        tasksById={tasksById}
-                        onProjectAddHandler={onProjectAddHandler}
-                    />
-                </section>
-            )
-        }}
-        </ThemeContext.Consumer>
+        <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
+            <BackButton/>
+            <ThemeSwitcher/>
+            <ProjectPageContent 
+                projectsById={projectsById}
+                tasksById={tasksById}
+                onProjectAddHandler={onProjectAddHandler}
+            />
+        </section>
     )
 }
 
-export default ProjectsPage
+export const ProjectsPage = connect(mapStateToProps)(ProjectsPageComponent)
