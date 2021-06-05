@@ -5,6 +5,6 @@ import { projectsReducer } from './projects/projects'
 
 export const rootReducer = combineReducers({
     themeState: themeReducer,
-    tasksReducer: tasksReducer,
-    projectsReducer: projectsReducer
+    tasksById: tasksReducer,
+    projectsById: projectsReducer
 })

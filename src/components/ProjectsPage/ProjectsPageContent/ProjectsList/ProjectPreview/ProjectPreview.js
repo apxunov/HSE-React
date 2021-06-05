@@ -1,12 +1,16 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 // Импорт стилей
 import classes from './ProjectPreview.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => ({theme: state.themeState.theme})
+const mapStateToProps = (state) => {
+    return({
+        theme: state.themeState.theme,
+    })
+}
 
 const ProjectPreviewComponent = ({theme, id, name, description, tasksNum}) => {
     return (

@@ -1,10 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import {ProjectPreview} from './ProjectPreview/ProjectPreview'
 
-const ProjectsList = ({projectsById}) => {    
-    return Object.values(projectsById).map( (project) => {
+const mapStateToProps = (state) => {
+    return({projects: state.projectsById.projects})
+}
+
+const ProjectsListComponent = ( {projects} ) => {    
+    return Object.values(projects).map( (project) => {
         return(
             <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
                 <ProjectPreview
@@ -18,4 +23,4 @@ const ProjectsList = ({projectsById}) => {
     })
 }
 
-export default ProjectsList
+export const ProjectsList = connect(mapStateToProps)(ProjectsListComponent)

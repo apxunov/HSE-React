@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ProjectsPageHeader from './ProjectsPageHeader/ProjectsPageHeader'
-import ProjectsList from './ProjectsList/ProjectsList'
+import {ProjectsList} from './ProjectsList/ProjectsList'
 import {ProjectAdd} from './ProjectAdd/ProjectAdd'
 
 import classes from './ProjectsPageContent.module.scss'
