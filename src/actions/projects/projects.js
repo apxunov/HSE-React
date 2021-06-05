@@ -1,12 +1,9 @@
-export const PROJECT_NAME_CHANGE = 'PROJECT_NAME_CHANGE'
-export const PROJECT_DESCRIPTION_CHANGE = 'PROJECT_DESCRIPTION_CHANGE'
+export const PROJECT_ADD = 'PROJECT_ADD'
 
-export const handleProjectNameChange = (name) => ({ 
-    type: PROJECT_NAME_CHANGE,
-    payload: name
-})
-
-export const handleProjectDescriptionChange = (description) => ({ 
-    type: PROJECT_NAME_CHANGE,
-    payload: description
+export const handleProjectAdd = (id, name, description) => ({
+    type: PROJECT_ADD,
+    id: id,
+    name: name,
+    description: description,
+    tasksIds: []
 })

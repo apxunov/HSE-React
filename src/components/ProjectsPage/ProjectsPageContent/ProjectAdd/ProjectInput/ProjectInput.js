@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleProjectNameChange, handleProjectDescriptionChange } from '../../../../../actions/projects/projects'
+import { handleProjectAdd } from '../../../../../actions/projects/projects'
 
 import TextInput from '../../../../ProjectPage/ProjectContent/TaskAdd/TaskInput/TextInput/TextInput'
 import {Button} from '../../../../UI/Button/Button'
@@ -8,46 +8,66 @@ import {Button} from '../../../../UI/Button/Button'
 const mapStateToProps = (state) => {
   return({
     id: Object.keys(state.projectsByIds.projects).length+1,
-    name: state.projectsByIds.projectToAdd.name,
-    description: state.projectsByIds.projectToAdd.description
+    name: "", 
+    description: ""
   })
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchOnNameChange: (newName) => dispatch(handleProjectNameChange(newName)),
-  dispatchOnDescriptionChange: (newDescription) => dispatch(handleProjectDescriptionChange(newDescription))
+  dispatchOnProjectAdd: (id, name, description) => dispatch(handleProjectAdd(id, name, description))
 });
 
 const ProjectInputComponent = (
   {
+    id,
     name, 
     description,
-    dispatchOnNameChange,
-    dispatchOnDescriptionChange,
+    dispatchOnProjectAdd
   }) => {
-  const onNameChange = (event) => dispatchOnNameChange(event.currentTarget.value)
-  const onDescriptionChange = (event) => dispatchOnDescriptionChange(event.currentTarget.value)
-  // const onProjectAdd = (id, name, description) => dispatchOnProjectAdd(id, name, description)
+
+    // собираю данные из инпутов name и description проекта
+    const onProjectDataChange = (event) => { 
+      switch (event.target.name) {
+        case 'projectName': {
+          name = event.currentTarget.value
+          return name
+        }
+        case 'projectDescription': {
+          description = event.currentTarget.value
+          return description
+        }
+        default: { return event.target.name }
+      }
+    }
+
+  const onProjectAdd = (id, name, description) => {
+    return dispatchOnProjectAdd(id, name, description)
+  }
+
+  const handleSubmit = (event) => {
+    console.log(id, name, description); // выводит, все ок
+    event.preventDefault()
+    return onProjectAdd(id, name, description)
+  }
 
   return (
-    // <form onSubmit={onProjectAdd(name, description)}>
-    <form>
+    <form onSubmit={handleSubmit}> 
       <fieldset>
         <TextInput 
             name="projectName" 
             placeholder='Enter project name'
             size=''
-            isRequired='true'
+            isRequired='1'
             value={name} 
-            onChange={onNameChange}
+            onChange={onProjectDataChange}
         />
         <TextInput 
             name='projectDescription'
             placeholder='Enter project description'
             size=''
-            isRequired='true'
+            isRequired='1'
             value={description} 
-            onChange={onDescriptionChange}
+            onChange={onProjectDataChange}
         />
         <Button 
             btnName={'Submit'}
