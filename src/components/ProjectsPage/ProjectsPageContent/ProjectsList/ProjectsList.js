@@ -11,7 +11,7 @@ const ProjectsList = ({projectsById}) => {
                     id={project.id}
                     name={project.name}
                     description={project.description}
-                    tasksNum={project.tasksNum}
+                    tasksNum={project.tasksIds.length}
                 />
             </Link>
         )

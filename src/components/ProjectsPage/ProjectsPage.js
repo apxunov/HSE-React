@@ -10,7 +10,10 @@ import classes from './ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => ({theme: state.themeState.theme}) // из store нам нужна только Тема (light или dark)
+const mapStateToProps = (state) => {
+    console.log('STATTE', state)
+    return({theme: state.themeState.theme})
+}
 
 const ProjectsPageComponent = ({theme, projectsById, tasksById, onProjectAddHandler}) => {
     return (
