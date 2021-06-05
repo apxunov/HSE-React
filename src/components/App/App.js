@@ -90,34 +90,34 @@ class App extends React.Component {
   }
 
   // Создавние нового проекта
-  onProjectAddHandler = (projectName, projectDescription) => {
-    // Новый проект будет иметь Id последнего +1
-    function setNewProjectId(projects) {
-      let lastId = 0
-      for (let projectId in projects) {
-        if (lastId <= projectId) {
-          lastId++
-        } else {return ++lastId}
-      }
-      return ++lastId
-    }
+  // onProjectAddHandler = (projectName, projectDescription) => {
+  //   // Новый проект будет иметь Id последнего +1
+  //   function setNewProjectId(projects) {
+  //     let lastId = 0
+  //     for (let projectId in projects) {
+  //       if (lastId <= projectId) {
+  //         lastId++
+  //       } else {return ++lastId}
+  //     }
+  //     return ++lastId
+  //   }
 
-    projectName&&projectDescription 
-    ? this.setState( (currentState) => {
-        const newProjectsList = {...currentState.projectsById}
-        const projectToBeAddedID = setNewProjectId(newProjectsList)
-        newProjectsList[projectToBeAddedID] = {
-          id: projectToBeAddedID,
-          name: projectName,
-          description: projectDescription,
-          tasksIds: []
-        }
-        return {
-          projectsById: newProjectsList
-        }
-    })
-    : alert('Enter PROJECT name and description!') 
-  }
+  //   projectName&&projectDescription 
+  //   ? this.setState( (currentState) => {
+  //       const newProjectsList = {...currentState.projectsById}
+  //       const projectToBeAddedID = setNewProjectId(newProjectsList)
+  //       newProjectsList[projectToBeAddedID] = {
+  //         id: projectToBeAddedID,
+  //         name: projectName,
+  //         description: projectDescription,
+  //         tasksIds: []
+  //       }
+  //       return {
+  //         projectsById: newProjectsList
+  //       }
+  //   })
+  //   : alert('Enter PROJECT name and description!') 
+  // }
 
   render() {
     console.log('STORE', store.getState());

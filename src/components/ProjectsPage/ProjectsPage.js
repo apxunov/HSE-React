@@ -11,7 +11,6 @@ import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
 const mapStateToProps = (state) => {
-    console.log('STATTE', state)
     return({theme: state.themeState.theme})
 }
 

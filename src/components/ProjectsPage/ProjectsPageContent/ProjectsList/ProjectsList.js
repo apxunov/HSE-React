@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {ProjectPreview} from './ProjectPreview/ProjectPreview'
 
 const mapStateToProps = (state) => {
-    return({projects: state.projectsById.projects})
+    return({projects: state.projectsByIds.projects})
 }
 
 const ProjectsListComponent = ( {projects} ) => {    

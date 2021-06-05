@@ -1,8 +1,8 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 // Импорт компонентов 
-import ProjectInput from './ProjectInput/ProjectInput'
+import { ProjectInput } from './ProjectInput/ProjectInput'
 
 // Импорт стилей
 import './ProjectAdd.module.scss';
