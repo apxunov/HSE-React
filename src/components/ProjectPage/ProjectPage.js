@@ -10,14 +10,15 @@ import classes from '../ProjectsPage/ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => ({theme: state.themeState.theme}) // из store нам нужна только Тема (light или dark)
+const mapStateToProps = (state) => ({
+    theme: state.themeState.theme,
+    projects: state.projectsByIds.projects
+}) 
 
-const ProjectPageComponent = ({theme, projectsById, tasksById, taskAddHandler, changeTaskStatusHandler}) => {
+const ProjectPageComponent = ({theme, projects}) => {
     const { projectId } = useParams() // получаем id проекта из URL
-    const project = projectsById[projectId]
+    const project = projects[projectId]
     const projectName = project?.name
-    const tasksIds = project?.tasksIds
-    const tasks = tasksIds?.map( taskId => tasksById[taskId] )
 
     return (
             <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
@@ -27,9 +28,6 @@ const ProjectPageComponent = ({theme, projectsById, tasksById, taskAddHandler, c
                 <ProjectContent
                     projectId={projectId}
                     projectName={projectName}
-                    tasks={tasks}
-                    taskAddHandler={taskAddHandler}
-                    changeTaskStatusHandler={changeTaskStatusHandler}
                 />
             </>
             </section>

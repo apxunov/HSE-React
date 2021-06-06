@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
         projects: state.projectsByIds.projects
     })
 
-const TaskListComponent = ( {projectId, projects, tasks, dispatchOnStatusChange} ) => {
+const TaskListComponent = ( {projectId, projects, tasks} ) => {
     const searchForTask = (tasksIds, tasksList) => {
         const specificTasksList = {}
         for (let taskId in tasksIds) {
@@ -30,10 +30,6 @@ const TaskListComponent = ( {projectId, projects, tasks, dispatchOnStatusChange}
                     <Task
                         key={task.id}
                         id={task.id}
-                        name={task.name}
-                        description={task.description}
-                        completed={task.completed}
-                        onClick={dispatchOnStatusChange}
                     />
                 )
             })

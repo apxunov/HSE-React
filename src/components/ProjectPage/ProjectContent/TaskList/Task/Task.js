@@ -24,17 +24,22 @@ const mapDispatchToProps = (dispatch) => ({
 const TaskComponent = (
     { 
         theme, 
-        id, name, description, completed, 
+        tasks,
+        id,
         dispatchOnStatusChange
-        // onClick 
     }) => {
-    const classTaskStatus = completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
+    const thisTask = tasks[id]
+    const classTaskStatus = thisTask.completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
     return (
             // в зависимости от темы приложения и completed-статуса таски возвращаем стили
             <div id={id} className={cx('task', `task-theme-${theme}`, `${classTaskStatus}`)}> 
-                <h2>{name}</h2>
-                <p>{description}</p>
-                { completed ? <Button btnName='Undone' onClick={() => dispatchOnStatusChange(id, completed)}/> : <Button btnName='Done' onClick={() => dispatchOnStatusChange(id, completed)}/> }
+                <h2>{thisTask.name}</h2>
+                <p>{thisTask.description}</p>
+                { 
+                thisTask.completed 
+                    ? <Button btnName='Undone' onClick={() => dispatchOnStatusChange(thisTask.id, thisTask.completed)}/> 
+                    : <Button btnName='Done' onClick={() => dispatchOnStatusChange(thisTask.id, thisTask.completed)}/> 
+                }
             </div>
         )}
 

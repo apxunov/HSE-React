@@ -25,11 +25,9 @@ class ProjectContent extends React.Component {
         <div className={cx('tasks-wrapper__layout')}>
           <TaskAdd
               projectId={projectId}
-              taskAddHandler={this.props.taskAddHandler}
           />
           <TaskList
               projectId={projectId}
-              onClick={this.props.changeTaskStatusHandler}
           />
         </div>
       </>

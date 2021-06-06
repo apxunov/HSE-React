@@ -120,7 +120,6 @@ class App extends React.Component {
   // }
 
   render() {
-    console.log('STORE', store.getState());
     return (
       <Provider store={store}>
         <BrowserRouter>
@@ -129,19 +128,10 @@ class App extends React.Component {
                 <HomePage/>
               </Route>
               <Route exact path='/projects'>
-                  <ProjectsPage 
-                    projectsById={this.state.projectsById} 
-                    tasksById={this.state.tasksById}
-                    onProjectAddHandler={this.onProjectAddHandler}
-                  />
+                  <ProjectsPage />
               </Route>
               <Route exact path='/projects/:projectId'>
-                  <ProjectPage
-                    projectsById={this.state.projectsById} 
-                    tasksById={this.state.tasksById}
-                    taskAddHandler={this.taskAddHandler}
-                    changeTaskStatusHandler={this.changeTaskStatusHandler}
-                  />
+                  <ProjectPage/>
               </Route>
               <Route>
                 <PageNotFound/>
