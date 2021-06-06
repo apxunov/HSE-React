@@ -2,7 +2,7 @@ import React from 'react'
 
 // Импорт компонентов
 import ProjectHeader from './ProjectHeader/ProjectHeader'
-import TaskList from './TaskList/TaskList'
+import {TaskList} from './TaskList/TaskList'
 import {TaskAdd} from './TaskAdd/TaskAdd';
 
 // Импорт стилей
@@ -28,7 +28,7 @@ class ProjectContent extends React.Component {
               taskAddHandler={this.props.taskAddHandler}
           />
           <TaskList
-              tasksList={tasks}
+              // tasksList={tasks}
               onClick={this.props.changeTaskStatusHandler}
           />
         </div>

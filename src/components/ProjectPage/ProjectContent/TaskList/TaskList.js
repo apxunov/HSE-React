@@ -1,11 +1,14 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import {Task} from './Task/Task'
-import {Redirect} from 'react-router-dom'
 
-const TaskList = ( {tasksList, onClick} ) => {
-    if (tasksList) {
+const mapStateToProps = (state) => ({tasks: state.tasksByIds.tasks})
+
+const TaskListComponent = ( {tasks, onClick} ) => {
+    if (tasks) {
         return (
-            tasksList.map( task => {
+            Object.values(tasks).map( task => {
                 return (
                     <Task
                         key={task.id}
@@ -24,4 +27,4 @@ const TaskList = ( {tasksList, onClick} ) => {
     }
 }
 
-export default TaskList
+export const TaskList = connect(mapStateToProps)(TaskListComponent)
