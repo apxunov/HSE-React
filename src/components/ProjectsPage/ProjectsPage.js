@@ -10,20 +10,14 @@ import classes from './ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => {
-    return({theme: state.themeState.theme})
-}
+const mapStateToProps = (state) => ({theme: state.themeState.theme,})
 
-const ProjectsPageComponent = ({theme, projectsById, tasksById, onProjectAddHandler}) => {
+const ProjectsPageComponent = ({theme}) => {
     return (
         <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
             <BackButton/>
             <ThemeSwitcher/>
-            <ProjectPageContent 
-                projectsById={projectsById}
-                tasksById={tasksById}
-                onProjectAddHandler={onProjectAddHandler}
-            />
+            <ProjectPageContent/>
         </section>
     )
 }

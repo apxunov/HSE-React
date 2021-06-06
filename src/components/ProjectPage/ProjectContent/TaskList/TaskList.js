@@ -11,13 +11,13 @@ const mapStateToProps = (state) => ({
 const TaskListComponent = ( {projectId, projects, tasks} ) => {
     const searchForTask = (tasksIds, tasksList) => {
         const specificTasksList = {}
-        for (let taskId in tasksIds) {
-            Object.values(tasksList).map( (task) => {
+        Object.values(tasksIds).map( taskId => {
+            return Object.values(tasksList).map( (task) => {
                 return task.id.toString() === taskId.toString() 
                 ? specificTasksList[taskId] = task
                 : null
             })
-        }
+        })
         return specificTasksList
     }
     const projectTasksIds = projects[projectId].tasksIds

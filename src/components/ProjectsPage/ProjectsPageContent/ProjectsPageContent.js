@@ -8,16 +8,13 @@ import classes from './ProjectsPageContent.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const ProjectsPage = ({projectsById, tasksById, onProjectAddHandler}) => {
+const ProjectsPage = () => {
     return (
         <>
             <ProjectsPageHeader/>
             <div className={cx('projects-page__projects')}>
-                <ProjectAdd onProjectAddHandler={onProjectAddHandler}/>
-                <ProjectsList 
-                    projectsById={projectsById}
-                    tasksById={tasksById}
-                />
+                <ProjectAdd/>
+                <ProjectsList/>
             </div>
         </>
     )
