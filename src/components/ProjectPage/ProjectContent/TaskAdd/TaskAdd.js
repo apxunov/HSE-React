@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
 // Импорт компонентов
-import TaskInput from './TaskInput/TaskInput'
+import {TaskInput} from './TaskInput/TaskInput'
 
 // Импорт стилей
 import './TaskAdd.module.scss';
@@ -11,13 +12,12 @@ const cx = classnames.bind(classes)
 
 const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
-const TaskAddComponent = ({theme, taskAddHandler, projectId}) => {
+const TaskAddComponent = ({theme, projectId}) => {
     return (
         <div className={cx("task", `task-theme-${theme}`)}>
             <h2>Create new task</h2>
             <TaskInput
                 projectId={projectId}
-                taskAddHandler={taskAddHandler}
             />
         </div>
     )

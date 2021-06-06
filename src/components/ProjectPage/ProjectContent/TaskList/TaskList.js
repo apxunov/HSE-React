@@ -3,15 +3,18 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {Task} from './Task/Task'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+    console.log('TASKSLIST',state);
+    return({
         tasks: state.tasksByIds.tasks,
         projects: state.projectsByIds.projects
     })
+}
 
 const TaskListComponent = ( {projectId, projects, tasks} ) => {
     const searchForTask = (tasksIds, tasksList) => {
         const specificTasksList = {}
-        Object.values(tasksIds).map( taskId => {
+        Object.values(tasksIds)?.map( taskId => {
             return Object.values(tasksList).map( (task) => {
                 return task.id.toString() === taskId.toString() 
                 ? specificTasksList[taskId] = task
@@ -20,7 +23,7 @@ const TaskListComponent = ( {projectId, projects, tasks} ) => {
         })
         return specificTasksList
     }
-    const projectTasksIds = projects[projectId].tasksIds
+    const projectTasksIds = projects[projectId]?.tasksIds
     const projectTasks = searchForTask(projectTasksIds, tasks)
 
     if (projectTasks) {

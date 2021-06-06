@@ -12,13 +12,18 @@ export const projectsReducer = (state = initialState, action) => {
         switch (action.type) {
           case PROJECT_ADD: {
             const newProjId = action.id
-            state.projects[newProjId] = {
+            const newProjectsList = {...state.projects}
+            newProjectsList[newProjId] = {
                 id: action.id,
                 name: action.name,
-                description: action.description
+                description: action.description,
+                tasksIds: []
             }
             console.log('projectsReducer - покажи стейт', state);
-            return state 
+            return {
+              ...state,
+              projects: newProjectsList
+            }
           }
           default:
             return state;

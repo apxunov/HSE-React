@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux' // чтобы подключить store
+import { connect } from 'react-redux'
 
 import ProjectPageContent from './ProjectsPageContent/ProjectsPageContent'
 import {ThemeSwitcher} from '../UI/ThemeSwitcher/ThemeSwitcher'
