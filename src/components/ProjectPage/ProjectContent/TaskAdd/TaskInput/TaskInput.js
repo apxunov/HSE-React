@@ -32,8 +32,10 @@ class TaskInputComponent extends React.Component {
       event.preventDefault()
       const projectId = this.props.projectId
       const newTaskId = ++Object.keys(this.props.tasks)[Object.keys(this.props.tasks).length-1] // id новой таски = id последней + 1
-      return this.props.dispatchOnPojectTaskAdd(projectId, newTaskId, this.state.taskName, this.state.taskDescription, false)
-      // console.log(projectId, newTaskId);
+      return [ 
+        this.props.dispatchOnTaskAdd(projectId, newTaskId, this.state.taskName, this.state.taskDescription),
+        this.props.dispatchOnPojectTaskAdd(projectId, newTaskId, this.state.taskName, this.state.taskDescription, false)
+      ]
     }
   
     render() {

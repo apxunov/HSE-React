@@ -20,7 +20,6 @@ export const projectsReducer = (state = initialState, action) => {
                 tasksIds: []
             }
             
-            console.log('projectsReducer - покажи стейт', state);
             return {
               ...state,
               projects: newProjectsList

@@ -21,11 +21,10 @@ export const tasksReducer = (state = initialState, action) => {
         newTasksList[taskId] = {
           id: taskId,
           name: taskName,
-          descriptiom: taskDescription,
+          description: taskDescription,
           completed: false
         }
 
-        console.log('UPDATE from TASKSREDUCER', newTasksList, newProjectsList);
         return { 
           ...state, 
           projects: newProjectsList,

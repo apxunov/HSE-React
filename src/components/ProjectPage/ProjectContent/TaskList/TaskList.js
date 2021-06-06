@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {Task} from './Task/Task'
 
 const mapStateToProps = (state) => {
-    console.log('TASKSLIST',state);
+
     return({
         tasks: state.tasksByIds.tasks,
         projects: state.projectsByIds.projects

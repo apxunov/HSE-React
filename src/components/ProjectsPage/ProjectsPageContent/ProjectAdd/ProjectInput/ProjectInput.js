@@ -45,7 +45,6 @@ const ProjectInputComponent = (
   }
 
   const handleSubmit = (event) => {
-    console.log(id, name, description); // выводит, все ок
     event.preventDefault()
     return onProjectAdd(id, name, description)
   }
