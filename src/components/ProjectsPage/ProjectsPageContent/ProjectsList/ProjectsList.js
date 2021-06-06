@@ -9,11 +9,11 @@ const mapStateToProps = (state) => {
 }
 
 const ProjectsListComponent = ( {projects} ) => {    
-    return Object.values(projects).map( (project, index) => {
+    return Object.values(projects).map( (project) => {
         return(
-            <Link to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
+            <Link key={project.id} to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
                 <ProjectPreview
-                    key={index}
+                    key={project.id}
                     id={project.id}
                     name={project.name}
                     description={project.description}
