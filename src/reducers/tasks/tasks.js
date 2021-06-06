@@ -15,7 +15,7 @@ export const tasksReducer = (state = initialState, action) => {
         const {projectId, taskId, taskName, taskDescription} = action
         
         const newProjectsList = {...state.projects}
-        newProjectsList[projectId].tasksIds.push(taskId)
+        newProjectsList[projectId]?.tasksIds.push(taskId)
 
         const newTasksList = {...state.tasks}
         newTasksList[taskId] = {

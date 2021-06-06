@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import TextInput from './TextInput/TextInput'
 import {Button} from '../../../../UI/Button/Button'
 import { handleTaskAdd } from '../../../../../actions/tasks/tasks'
+import { handleProjectTaskAdd } from '../../../../../actions/projects/projects'
 
 const mapStateToProps = (state) => {
   return ({
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchOnTaskAdd: (projectId, taskId, taskName, taskDescription) => dispatch(handleTaskAdd(projectId, taskId, taskName, taskDescription))
+  dispatchOnTaskAdd: (projectId, taskId, taskName, taskDescription) => dispatch(handleTaskAdd(projectId, taskId, taskName, taskDescription)),
+  dispatchOnPojectTaskAdd: (projectId, taskId, taskName, taskDescription, taskStatus) => dispatch(handleProjectTaskAdd(projectId, taskId, taskName, taskDescription, taskStatus))
 })
 
 class TaskInputComponent extends React.Component {
@@ -30,7 +32,7 @@ class TaskInputComponent extends React.Component {
       event.preventDefault()
       const projectId = this.props.projectId
       const newTaskId = ++Object.keys(this.props.tasks)[Object.keys(this.props.tasks).length-1] // id новой таски = id последней + 1
-      return this.props.dispatchOnTaskAdd(projectId, newTaskId, this.state.taskName, this.state.taskDescription)
+      return this.props.dispatchOnPojectTaskAdd(projectId, newTaskId, this.state.taskName, this.state.taskDescription, false)
       // console.log(projectId, newTaskId);
     }
   
