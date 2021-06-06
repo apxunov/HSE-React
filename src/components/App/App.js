@@ -2,13 +2,13 @@ import React from 'react'
 import { BrowserRouter, Route, Switch} from "react-router-dom"
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { rootReducer } from '../../reducers/index' // Импорт общего reducer'а
 
 // Импорт компонентов
 import {HomePage} from './HomePage/HomePage'
 import {ProjectsPage} from '../ProjectsPage/ProjectsPage'
 import {ProjectPage} from '../ProjectPage/ProjectPage'
 import {PageNotFound} from './PageNotFound/PageNotFound'
-import { rootReducer } from '../../reducers/index' // Импорт общего reducer'а
 
 // Импорт стилей 
 import '../App/App.scss';
