@@ -14,8 +14,13 @@ export const tasksReducer = (state = initialState, action) => {
         return { ...state, tasks: action.payload }
       }
       case CHANGE_TASK_STATUS: {
+          let taskToChangeStatusID = action.id
+          let updatedTasksList = {...state.tasks}
+          updatedTasksList[taskToChangeStatusID].completed = !action.status
+          console.log('new tasks list', updatedTasksList);
           return {
               ...state,
+              tasksByIds: updatedTasksList
           }
       }
       default:

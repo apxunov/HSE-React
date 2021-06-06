@@ -6,7 +6,8 @@ export const handleTaskAdd = (task) => ({
     payload: task
 })
 
-export const handleTaskStatusChange = (task) => ({
+export const handleTaskStatusChange = (id, status) => ({
     type: CHANGE_TASK_STATUS,
-    payload: task
+    id: id,
+    status: status
 })

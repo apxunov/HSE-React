@@ -28,7 +28,7 @@ class ProjectContent extends React.Component {
               taskAddHandler={this.props.taskAddHandler}
           />
           <TaskList
-              // tasksList={tasks}
+              projectId={projectId}
               onClick={this.props.changeTaskStatusHandler}
           />
         </div>
