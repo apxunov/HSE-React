@@ -1,110 +1,173 @@
 import React from 'react'
 import '../App/App.scss';
+import { BrowserRouter, Route, Switch} from "react-router-dom"
+
 
 // Импорт компонентов
-import MyTodoList from '../MyTodoList/MyTodoList'
-import Switch from '../UI/Switch/Switch'
+import HomePage from './HomePage/HomePage'
+import ProjectsPage from '../ProjectsPage/ProjectsPage'
+import ProjectPage from '../ProjectPage/ProjectPage'
+import PageNotFound from './PageNotFound/PageNotFound'
 
 // Импорт контекста
 import { DEFAULT_THEME, ThemeContext } from "./ThemeContext"
 
-import classes from './App.scss'
-import classnames from "classnames/bind"
-const cx = classnames.bind(classes)
-// import { createGlobalStyle } from 'styled-components'
+import projects from '../ProjectsData/projectsData'
+import normalizeState from '../ProjectsData/stateNormalizer'
+
+// Функция нормализует "стейт" (файл projects со вложенной структорой) и вернет на выходе объект со вложенными projectsById и tasksById
+const {projectsById, tasksById} = normalizeState(projects)
 
 class App extends React.Component {
   state = {
     theme: DEFAULT_THEME,
-    tasks: [
-      {
-        id: 1,
-        name: 'Buy milk',
-        description: '20 packages of Parmalat 1.5%',
-        completed: true
-      },
-      {
-        id: 2,
-        name: 'Write a review',
-        description: 'Write a review for season 1 of the series "Love Death + Robots"',
-        completed: false
-      },
-      {
-        id: 3,
-        name: 'Find ball and sneakers',
-        description: "We'll play basketball this Wednesday",
-        completed: true
-      },
-      {
-        id: 4,
-        name: 'Take a pizza cooking lesson',
-        description: 'Ur gf bet she cooks better🤢',
-        completed: true
-      },
-      {
-        id: 5,
-        name: 'Visit parents',
-        description: 'This weekend we might go for a walk. Go visit a restaurant on Kitay-Gorod',
-        completed: true
-      },
-    ]
+    themeTurnedToDark: false,
+    // нормализуем стейт, записав в него соответствующие выводы функции normalizeState
+    projectsById, 
+    tasksById
   };
 
   // Смена статуса таски completed: done / undone
-  handleTaskStatus = (taskID) => {
-    const taskToChange_id = this.state.tasks.findIndex((task) => task.id === taskID); // находим id таски, которую нужно изменить 
-    this.setState((currentState) => {
-      const newTasksList = [...currentState.tasks] // дублируем стейт
-      newTasksList[taskToChange_id] = { ...newTasksList[taskToChange_id], completed: !currentState.tasks[taskToChange_id].completed } // инвертируем булевое значение
-      return {
-        tasks: newTasksList // сетим новым стейт
-      }
-    })
+  changeTaskStatusHandler = (taskId) => {
+    const taskToChange = this.state.tasksById[taskId]
+    const taskToChange_updatedStatus = { ...taskToChange, completed: !taskToChange.completed }
+
+    this.setState( (currentState) => ({
+        tasksById: {
+          ...currentState.tasksById, 
+          [taskId]: taskToChange_updatedStatus
+        }
+    }))
   }
 
   // Добавление таски
-  submitHandler = (name, value) => {
-    name&&value ? this.setState( (currentState) => { // если поля desription и name заполнены.. 
-      const newTasksList = [...currentState.tasks] // дублируем таски из стейта
-      const tasksLastID = newTasksList.length // присвоем IDшник новой таске = +1 к последнему таскID из стейта
-      newTasksList[tasksLastID] = { // если name и desciption заполнены..
-        id: tasksLastID+1, // то творим новый объект для нового таска
-        name: name,
-        description: value,
+  taskAddHandler = (projectId, taskName, taskDescription) => {
+    taskName&&taskDescription 
+    ? this.setState( (currentState) => {
+      const projectTasksIdsList = [...currentState.projectsById[projectId].tasksIds]
+      const tasksList = {...currentState.tasksById};
+      
+      // Ставим новой таске Id последней +1
+      function getLastId(tasks) {
+        let lastId = 0
+        for (let task in tasks) {
+          if (lastId <= task) {
+            lastId++
+          } else {return lastId}
+        }
+        return lastId
+      }
+
+      const lastTask_id = getLastId(tasksList)
+      const newTask_id = lastTask_id+1
+      const projectNewTask_id = getLastId(projectTasksIdsList)
+
+      // новый ProjectsByIds
+      projectTasksIdsList[projectNewTask_id] = newTask_id
+
+      // новый TasksByIds
+      tasksList[newTask_id] = {
+        id: newTask_id,
+        name: taskName,
+        description: taskDescription,
         completed: false
-      } 
+      }
 
       return {
-        tasks: newTasksList //.. то обновляем стейт
+        projectsById: { // соответсвующему проекту присваиваем новый массив айдишников тасок
+          ...currentState.projectsById,
+          [projectId]: { ...currentState.projectsById[projectId], 
+              tasksIds: projectTasksIdsList
+          }
+        },
+        tasksById: tasksList // обновляем массив айдишников всех тасок
       }
-    })
-    : alert('Enter name and description!') // ..а если пусты, то алёртим пользователя, чтобы тот внес данные
+      
+    } )
+    : alert('Enter NEW TASK name and description')
   }
 
   // Смена темы
-  themeChangeHadnler = (event) => {
+  themeChangeHandler = (event) => {
     const themeMode = event.target.checked ? 'dark' : 'light'
-    this.setState( {theme: themeMode} )
+    this.setState( {theme: themeMode, themeTurnedToDark: !this.state.themeTurnedToDark} )
+  }
+
+  // Создавние нового проекта
+  onProjectAddHandler = (projectName, projectDescription) => {
+    // Новый проект будет иметь Id последнего +1
+    function setNewProjectId(projects) {
+      let lastId = 0
+      for (let projectId in projects) {
+        if (lastId <= projectId) {
+          lastId++
+        } else {return ++lastId}
+      }
+      return ++lastId
+    }
+
+    projectName&&projectDescription 
+    ? this.setState( (currentState) => {
+        const newProjectsList = {...currentState.projectsById}
+        const projectToBeAddedID = setNewProjectId(newProjectsList)
+        newProjectsList[projectToBeAddedID] = {
+          id: projectToBeAddedID,
+          name: projectName,
+          description: projectDescription,
+          tasksIds: []
+        }
+        return {
+          projectsById: newProjectsList
+        }
+    })
+    : alert('Enter PROJECT name and description!') 
   }
 
   render() {
     return (
-      <section className={cx('application-wrapper', `application-wrapper-theme-${this.state.theme}`)}>
-        <div className={cx('tasks-wrapper__layout')}>
-          <ThemeContext.Provider value={this.state.theme}>
-            <>
-              <Switch
-                  themeChangeHadnler={this.themeChangeHadnler}
+      <BrowserRouter>
+        <ThemeContext.Provider value={this.state.theme}>
+          <Switch>
+            <Route exact path='/'>
+              <HomePage 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
               />
-              <MyTodoList 
-                  tasks={this.state.tasks}
-                  submitHandler={this.submitHandler}
-                  handleTaskStatus={this.handleTaskStatus}
+            </Route>
+            <Route exact path='/projects'>
+                <ProjectsPage 
+                  projectsById={this.state.projectsById} 
+                  tasksById={this.state.tasksById}
+                  themeChangeHandler={this.themeChangeHandler}
+                  onProjectAddHandler={this.onProjectAddHandler}
+                  themeTurnedToDark={this.state.themeTurnedToDark}
+                />
+            </Route>
+            <Route exact path='/projects/:projectId'>
+                <ProjectPage
+                  projectsById={this.state.projectsById} 
+                  tasksById={this.state.tasksById}
+                  taskAddHandler={this.taskAddHandler}
+                  changeTaskStatusHandler={this.changeTaskStatusHandler}
+                  themeChangeHandler={this.themeChangeHandler}
+                  themeTurnedToDark={this.state.themeTurnedToDark}
+                />
+            </Route>
+            <Route>
+              <PageNotFound 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
               />
-            </>
-          </ThemeContext.Provider>
-        </div>
-      </section>
+            </Route>
+            <Route exact path='/404'>
+              <PageNotFound 
+                themeChangeHandler={this.themeChangeHandler}
+                themeTurnedToDark={this.state.themeTurnedToDark}
+              />
+            </Route>
+          </Switch>
+        </ThemeContext.Provider>
+      </BrowserRouter>
     )
   }
 }

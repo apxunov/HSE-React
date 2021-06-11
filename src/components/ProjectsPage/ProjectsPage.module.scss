@@ -1,0 +1,11 @@
+@import '../UI/globalStyleVariables/global.scss';
+
+.application-wrapper {
+  min-height: 100vh;
+  &-theme-light {
+    background: $page-BackgroundColor-light;
+  }
+  &-theme-dark {
+    background: $page-BackgroundColor-dark;
+  }
+}

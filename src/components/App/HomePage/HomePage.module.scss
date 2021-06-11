@@ -1,0 +1,27 @@
+@import '../../UI/globalStyleVariables/global.scss';
+@import '../../ProjectsPage/ProjectsPage.module.scss';
+
+.homepage_backgroud {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    
+    width: 60vw;
+    max-width: 1440px;
+    margin: 0px auto;
+    padding-top: 100px;
+
+    * {
+        color: $text-color;
+        border-color: $text-color;
+    }
+
+    h1 {
+        font-size: 80px;
+        color: $light-color;
+    }   
+    p {
+        margin: 1rem 0px 0px;
+    }
+}
