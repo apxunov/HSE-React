@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch} from "react-router-dom"
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 import { rootReducer } from '../../reducers/index' // Импорт общего reducer'а
 
 // Импорт компонентов
@@ -14,7 +15,7 @@ import {PageNotFound} from './PageNotFound/PageNotFound'
 import '../App/App.scss';
 
 // Инициализация store
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export const App =() => {
     return (
@@ -31,9 +32,6 @@ export const App =() => {
                   <ProjectPage/>
               </Route>
               <Route>
-                <PageNotFound/>
-              </Route>
-              <Route exact path='/404'>
                 <PageNotFound/>
               </Route>
             </Switch>

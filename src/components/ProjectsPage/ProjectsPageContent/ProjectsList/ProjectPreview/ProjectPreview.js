@@ -12,12 +12,12 @@ const mapStateToProps = (state) => {
     })
 }
 
-const ProjectPreviewComponent = ({theme, id, name, description, tasksNum}) => {
+const ProjectPreviewComponent = ({theme, id, name, description, tasksCount}) => {
     return (
         <div id={`project#${id}`} className={cx('project', `project-theme-${theme}`)}>
             <h2>{name}</h2>
-            {tasksNum 
-                ? <p>{description}. <br/> Has {tasksNum} tasks</p> 
+            {tasksCount 
+                ? <p>{description}. <br/> Has {tasksCount} tasks</p> 
                 : <p>{description}. <br/> Has no tasks yet.</p>}
         </div>
     )

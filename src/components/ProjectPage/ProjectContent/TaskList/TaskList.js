@@ -22,10 +22,10 @@ const TaskListComponent = ( {projectId, projects, tasks} ) => {
         })
         return specificTasksList
     }
-    const projectTasksIds = projects[projectId]?.tasksIds
-    const projectTasks = searchForTask(projectTasksIds, tasks)
 
-    if (projectTasks) {
+    if (projects[projectId]) {
+        const projectTasksIds = projects[projectId]?.tasksIds
+        const projectTasks = searchForTask(projectTasksIds, tasks)
         return (
             Object.values(projectTasks).map( task => {
                 return (

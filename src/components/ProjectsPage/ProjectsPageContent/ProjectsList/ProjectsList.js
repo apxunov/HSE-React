@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
+// Импорт компонента
+import {ProjectPreview} from './ProjectPreview/ProjectPreview' 
+// Импорт action 
+import { fetchProjectsLoaded } from '../../../../actions/projects/projects'
 
-import {ProjectPreview} from './ProjectPreview/ProjectPreview'
+const mapStateToProps = (state) => ({projects: state.projectsByIds.projects})
 
-const mapStateToProps = (state) => {
-    return({projects: state.projectsByIds.projects})
-}
+const mapDispatchToProps = (dispatch) => ({
+    dispatchFetchProjectsLoad: (projects) => dispatch(fetchProjectsLoaded(projects))
+})
 
-const ProjectsListComponent = ( {projects} ) => {    
+const ProjectsListComponent = ( {projects, dispatchFetchProjectsLoad} ) => {  
+    const [_projects, set_Projects] = useState([])
+    useEffect(() => {
+        //???
+    })
     return Object.values(projects).map( (project) => {
         return(
             <Link key={project.id} to={`/projects/${project.id}`} style={{ textDecoration: 'none' }}>
@@ -16,12 +24,11 @@ const ProjectsListComponent = ( {projects} ) => {
                     key={project.id}
                     id={project.id}
                     name={project.name}
-                    description={project.description}
-                    tasksNum={project.tasksIds?.length}
+                    tasksCount={project.tasksCount?.length}
                 />
             </Link>
         )
     })
 }
 
-export const ProjectsList = connect(mapStateToProps)(ProjectsListComponent)
+export const ProjectsList = connect(mapStateToProps, mapDispatchToProps)(ProjectsListComponent)
