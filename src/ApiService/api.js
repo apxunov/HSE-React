@@ -1,6 +1,6 @@
-import React from 'react'
+// import normalizeState from '../components/ProjectsData/stateNormalizer'
 
-export default class ApiService extends React.Component {
+export default class ApiService {
   BASE_URL = 'http://valerystatinov.com/api'
 
   request = (url, method, body) => {
@@ -18,20 +18,24 @@ export default class ApiService extends React.Component {
       return this.request(url, method)
   }
 
-  loadProjects(url='/projects/') {
+  loadData = (url='/projects/') => {
     return this.get(url)
     .then(response => {
-      console.log('load projects api \n',response);
-      const projects = []
+      const result = {
+        projects: [],
+        tasks: []
+      }
       Object.values(response).map( (project, id) => {
-        return projects[id] = {
+        return result.projects[id] = {
           id: project.id,
           name: project.name,
           tasksCount: project.tasksCount
         }
       })
-      return projects
+      console.log('load projects api \n',result);
+      return result
+      // return normalizeState(result)
     })
-    .catch(err => new Error('ApiService.loadProjects(): an error occured:\n', err))
+    .catch(err => new Error('ApiService.loadData(): an error occured:\n', err))
   }
 }

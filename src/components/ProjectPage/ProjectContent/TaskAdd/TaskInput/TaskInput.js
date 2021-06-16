@@ -7,8 +7,8 @@ import { handleProjectTaskAdd } from '../../../../../actions/projects/projects'
 
 const mapStateToProps = (state) => {
   return ({
-    tasks: state.tasksByIds.tasks,
-    projects: state.projectsByIds.projects
+    tasks: state.applicationData.tasksByIds,
+    projects: state.applicationData.projectsByIds
   })
 }
 

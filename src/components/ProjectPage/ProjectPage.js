@@ -10,14 +10,22 @@ import classes from '../ProjectsPage/ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => ({
-    theme: state.themeState.theme,
-    projects: state.projectsByIds.projects
-}) 
+// const mapStateToProps = (state) => ({
+//     theme: state.themeState.theme,
+//     projects: state.applicationData.projectsByIds
+// }) 
+const mapStateToProps = (state) => {
+    console.log('page', state);
+    return ({
+        theme: state.themeState.theme,
+        projects: state.applicationData.projectsByIds
+    })
+}
 
 const ProjectPageComponent = ({theme, projects}) => {
     const { projectId } = useParams() // получаем id проекта из URL
-    const project = projects[projectId]
+    const project = projects[Object.values(projects).map( (project, id) => project.id === Number(projectId) ? id : false)]
+    console.log('project', project);
     const projectName = project?.name
 
     return (
