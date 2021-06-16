@@ -32,7 +32,6 @@ export default class ApiService {
           tasksCount: project.tasksCount
         }
       })
-      console.log('load projects api \n',result);
       return result
       // return normalizeState(result)
     })

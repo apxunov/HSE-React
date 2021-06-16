@@ -15,7 +15,7 @@ const cx = classnames.bind(classes)
 //     projects: state.applicationData.projectsByIds
 // }) 
 const mapStateToProps = (state) => {
-    console.log('page', state);
+    console.log('Project Page STATE', state);
     return ({
         theme: state.themeState.theme,
         projects: state.applicationData.projectsByIds
@@ -25,7 +25,6 @@ const mapStateToProps = (state) => {
 const ProjectPageComponent = ({theme, projects}) => {
     const { projectId } = useParams() // получаем id проекта из URL
     const project = projects[Object.values(projects).map( (project, id) => project.id === Number(projectId) ? id : false)]
-    console.log('project', project);
     const projectName = project?.name
 
     return (

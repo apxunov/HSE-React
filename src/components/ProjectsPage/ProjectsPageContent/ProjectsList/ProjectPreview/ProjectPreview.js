@@ -17,8 +17,8 @@ const ProjectPreviewComponent = ({theme, id, name, description, tasksCount}) => 
         <div id={`project#${id}`} className={cx('project', `project-theme-${theme}`)}>
             <h2>{name}</h2>
             {tasksCount 
-                ? <p>{description}. <br/> Has {tasksCount} tasks</p> 
-                : <p>{description}. <br/> Has no tasks yet.</p>}
+                ? <p>Has {tasksCount} tasks</p> 
+                : <p>Has no tasks yet.</p>}
         </div>
     )
 }
