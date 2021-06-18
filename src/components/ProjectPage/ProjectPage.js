@@ -10,12 +10,8 @@ import classes from '../ProjectsPage/ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-// const mapStateToProps = (state) => ({
-//     theme: state.themeState.theme,
-//     projects: state.applicationData.projectsByIds
-// }) 
 const mapStateToProps = (state) => {
-    console.log('Project Page STATE', state);
+    console.log('Project Page STATE', state.applicationData.projectsByIds);
     return ({
         theme: state.themeState.theme,
         projects: state.applicationData.projectsByIds
@@ -24,9 +20,11 @@ const mapStateToProps = (state) => {
 
 const ProjectPageComponent = ({theme, projects}) => {
     const { projectId } = useParams() // получаем id проекта из URL
-    const project = projects[Object.values(projects).map( (project, id) => project.id === Number(projectId) ? id : false)]
-    const projectName = project?.name
+    let project_id = null 
+    Object.entries(projects).map(project => project[1].id === Number(projectId) ? project_id = project[0] : null) // находим проект по id из url 
+    const project = projects[project_id]
 
+    const projectName = project?.name
     return (
             <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
                 <BackButton/>
