@@ -27,7 +27,7 @@ const ProjectsListComponent = ( {projects, dispatchFetchDataLoaded} ) => {
                         key={project.id}
                         id={project.id}
                         name={project.name}
-                        tasksCount={project.tasksCount?.length}
+                        tasksCount={project.tasksIds?.length}
                     />
                 </Link>
             )
