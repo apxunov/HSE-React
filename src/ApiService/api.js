@@ -7,6 +7,7 @@ export default class ApiService {
       method,
       headers: {
         Token: 'apxunov',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
@@ -19,11 +20,21 @@ export default class ApiService {
   post(url, body) {
       return this.request(url, 'POST', body)
   }
+  put(url, body) {
+      return this.request(url, 'PUT', body)
+  }
 
-  // Выгрузка данных из API
+  // Загрузка задач
+  loadTasks = (url='/projects', projectId) => {
+    return this.get(`${url}/${projectId}/tasks/`)
+  }
+
+  // Загрузка данных из API
   loadData = (url='/projects/') => {
-    return this.get(url)
-    .then(response => {
+    return this.get(url).then(response => {
+      let tasks = this.loadTasks(310).then(res => res)
+      console.log('TASKS', tasks);
+
       const result = {
         projects: [],
         tasks: []
@@ -40,11 +51,21 @@ export default class ApiService {
     .catch(err => new Error('ApiService.loadData(): an error occured:\n', err))
   }
 
-  // Загрузка нового проекта на бэк
-  uploadProject = (newProject_Name, url='/projects/') => {
+  // Загрузка нового проекта 
+  uploadProject = (name, url='/projects/') => {
     const _newProject = {
-      name: newProject_Name
+      name: name
     }
     return this.post(url, _newProject)
+  }
+
+  // Загрузка новой задачи 
+  uploadTask = (url='/projects', projectId, name, description) => {
+    const task = {
+      'name': name,
+      'description': description,
+      'completed': 0
+    }
+    return this.post(`${url}/${projectId}/tasks/`, task)
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { handleTaskStatusChange } from '../../../../../actions/tasks/tasks'
+// import { handleTaskStatusChange } from '../../../../../actions/tasks/tasks'
 
 // Импоррт компонентов
 import {Button} from '../../../../UI/Button/Button'
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => (
 )
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatchOnStatusChange: (id, status) => dispatch(handleTaskStatusChange(id, status))
+    // dispatchOnStatusChange: (id, status) => dispatch(handleTaskStatusChange(id, status))
 })
 
 const TaskComponent = (

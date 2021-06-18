@@ -19,3 +19,11 @@ export const fetchProjectUploadActionCreator = (projectName) => (dispatch) => {
     api.uploadProject(projectName)
     .then(() => dispatch(fetchDataLoaded()))
 }
+
+// Добавление задачи
+export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescription) => (dispatch) => {
+    console.log("HERE'S THE TASK", projectId, taskName, taskDescription)
+    const api = new ApiService()
+    api.uploadTask(projectId, taskName, taskDescription)
+    .then(() => dispatch(fetchDataLoaded()))
+}

@@ -45,7 +45,7 @@ const TaskListComponent = ( {projectId, projects, tasks} ) => {
         // )
     }
     else {
-        return (<h1>Nor fous</h1>)
+        return (<div/>)
         // return (<Redirect to='/404'/>)
     }
 }

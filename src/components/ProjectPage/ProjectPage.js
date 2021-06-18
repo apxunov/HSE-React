@@ -25,7 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatchFetchDataLoaded: (projects) => dispatch(fetchDataLoaded(projects))
 })
   
-
 const ProjectPageComponent = ({theme, projects, dispatchFetchDataLoaded}) => {
     const { projectId } = useParams() // получаем id проекта из URL
     
@@ -35,7 +34,7 @@ const ProjectPageComponent = ({theme, projects, dispatchFetchDataLoaded}) => {
 
     if (projects) {
         let project_id = null 
-        console.log('PROJECTS',projects);
+
         // находим проект по id из url 
         Object.entries(projects).map(project => project[1].id === Number(projectId) ? project_id = project[0] : null)
         const project = projects[project_id]
