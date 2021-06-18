@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatchFetchDataLoaded: (projects) => dispatch(fetchDataLoaded(projects))
+    dispatchFetchDataLoaded: (projects, tasks) => dispatch(fetchDataLoaded(projects, tasks))
 })
 
 const TaskListComponent = ( {projectId, projects, tasks} ) => {
@@ -36,6 +36,7 @@ const TaskListComponent = ( {projectId, projects, tasks} ) => {
             Object.values(projectTasks).map( task => {
                 return (
                     <Task
+                        projectId={projectId}
                         key={task.id}
                         id={task.id}
                     />

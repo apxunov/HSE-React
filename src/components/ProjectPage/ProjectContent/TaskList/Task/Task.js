@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import { handleTaskStatusChange } from '../../../../../actions/tasks/tasks'
+import {fetchStatusActionCreator} from '../../../../../actions/projects_and_tasks/projects_and_tasks'
 
 // Импоррт компонентов
 import {Button} from '../../../../UI/Button/Button'
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => (
 )
 
 const mapDispatchToProps = (dispatch) => ({
-    // dispatchOnStatusChange: (id, status) => dispatch(handleTaskStatusChange(id, status))
+    dispatchOnStatusChange: (projectId, taskId, name, description, completed) => dispatch(fetchStatusActionCreator(projectId, taskId, name, description, completed))
 })
 
 const TaskComponent = (
@@ -26,19 +26,24 @@ const TaskComponent = (
         theme, 
         tasks,
         id,
+        projectId,
         dispatchOnStatusChange
     }) => {
-    const thisTask = tasks[id]
-    const classTaskStatus = thisTask.completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
+    const task = tasks[id]
+    const classTaskStatus = task.completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
     return (
             // в зависимости от темы приложения и completed-статуса таски возвращаем стили
             <div id={id} className={cx('task', `task-theme-${theme}`, `${classTaskStatus}`)}> 
-                <h2>{thisTask.name}</h2>
-                <p>{thisTask.description}</p>
+                <h2>{task.name}</h2>
+                <p>{task.description}</p>
                 { 
-                thisTask.completed 
-                    ? <Button btnName='Undone' onClick={() => dispatchOnStatusChange(thisTask.id, thisTask.completed)}/> 
-                    : <Button btnName='Done' onClick={() => dispatchOnStatusChange(thisTask.id, thisTask.completed)}/> 
+                task.completed 
+                    ?   <Button btnName='Undone' onClick={
+                            () => dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
+                        }/> 
+                    :   <Button btnName='Done' onClick={
+                            () => dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
+                    }   /> 
                 }
             </div>
         )}

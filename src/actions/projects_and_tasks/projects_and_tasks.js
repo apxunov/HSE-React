@@ -26,3 +26,11 @@ export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescriptio
     api.uploadTask(projectId, taskName, taskDescription)
     .then(() => dispatch(fetchDataLoaded()))
 }
+
+// Смена статуса задачи
+export const fetchStatusActionCreator = (projectId, taskId, name, description, completed) => (dispatch) => {
+    const api = new ApiService()
+    console.log('im running', projectId, taskId, name, description, completed);
+    api.changeStatus(projectId, taskId, name, description, completed)
+    .then(() => dispatch(fetchDataLoaded()))
+}

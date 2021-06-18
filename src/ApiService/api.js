@@ -35,9 +35,8 @@ export default class ApiService {
   // Загрузка данных из API и их нормализация
   loadData = (url='/projects/') => {
     return this.get(url).then(response => {
-
+      
       const projects = []
-
       Object.values(response).map( (project, id) => {
         return projects.push({
           id: project.id,
@@ -76,5 +75,19 @@ export default class ApiService {
       'completed': 0
     }
     return this.post(`${url}/${projectId}/tasks/`, task)
+  }
+
+  // Смена статуса задачи
+  changeStatus = (projectId, taskId, name, description, completed, url='/projects') => {
+    console.log(`${url}/${projectId}/tasks/${taskId}`);
+    const updatedTask = {
+      name,
+      description,
+      priority: 1,
+      'completed': !completed,
+      'projectId': Number(projectId)
+    }
+    console.log(updatedTask);
+    return this.put(`${url}/${projectId}/tasks/${taskId}/`, updatedTask)
   }
 }
