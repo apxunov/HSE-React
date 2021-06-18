@@ -1,23 +1,26 @@
-// import normalizeState from '../components/ProjectsData/stateNormalizer'
-
 export default class ApiService {
   BASE_URL = 'http://valerystatinov.com/api'
 
+  // Запрос на бэк
   request = (url, method, body) => {
     return fetch(`${this.BASE_URL}${url}`, {
       method,
       headers: {
-        Token: 'Valeron',
+        Token: 'apxunov',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     }).then(res => res.json())
   }
 
-  get(url, method='GET') {
-      return this.request(url, method)
+  get(url) {
+      return this.request(url, 'GET')
+  }
+  post(url, body) {
+      return this.request(url, 'POST', body)
   }
 
+  // Выгрузка данных из API
   loadData = (url='/projects/') => {
     return this.get(url)
     .then(response => {
@@ -33,8 +36,15 @@ export default class ApiService {
         }
       })
       return result
-      // return normalizeState(result)
     })
     .catch(err => new Error('ApiService.loadData(): an error occured:\n', err))
+  }
+
+  // Загрузка нового проекта на бэк
+  uploadProject = (newProject_Name, url='/projects/') => {
+    const _newProject = {
+      name: newProject_Name
+    }
+    return this.post(url, _newProject)
   }
 }
