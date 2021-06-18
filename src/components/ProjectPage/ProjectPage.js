@@ -14,7 +14,6 @@ import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
 const mapStateToProps = (state) => {
-    console.log('MAP STATE TO PROPS (PROJECTPAGE)', state);
     return ({
         theme: state.themeState.theme,
         projects: state.applicationData.projectsByIds

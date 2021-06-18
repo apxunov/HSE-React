@@ -14,6 +14,7 @@ export default function normalizeState(projectsArray) {
       return projectTasksIds
     }
 
+
     projectsArray.map( project => {
       const projectTasks = project.tasks
       projectTasks.map( task => {
@@ -27,7 +28,6 @@ export default function normalizeState(projectsArray) {
       return normalizedProjectsArray[project.id] = {
         id: project.id,
         name: project.name,
-        description: project.description,
         tasksIds: getTasksIdsByProject(project.tasks)
       }
     })

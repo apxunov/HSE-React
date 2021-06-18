@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const TaskListComponent = ( {projectId, projects, tasks} ) => {
+    console.log('tasksList', tasks);
     const searchForTask = (tasksIds, tasksList) => {
         const specificTasksList = {}
         Object.values(tasksIds)?.map( taskId => {
@@ -28,7 +29,7 @@ const TaskListComponent = ( {projectId, projects, tasks} ) => {
         return specificTasksList
     }
     const project = projects[Object.values(projects).map( (project, id) => project.id === Number(projectId) ? id : false)]
-    console.log(project);
+    console.log('TAKSLIST', project);
     if (project) {
         const projectTasksIds = project?.tasksIds
         return (<div></div>)

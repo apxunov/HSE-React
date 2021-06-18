@@ -7,7 +7,6 @@ import {ProjectPreview} from './ProjectPreview/ProjectPreview'
 import { fetchDataLoaded } from '../../../../actions/projects_and_tasks/projects_and_tasks' 
 
 const mapStateToProps = (state) => {
-    console.log('MAP STATE TO PROPS (PROJECTLIST)', state);
     return({projects: state.applicationData.projectsByIds})
 }
 

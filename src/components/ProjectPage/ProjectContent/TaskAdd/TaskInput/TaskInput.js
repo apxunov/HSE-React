@@ -6,7 +6,6 @@ import {fetchTaskUploadActionCreator} from '../../../../../actions/projects_and_
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchOnTaskAdd: (projectId, name, description) => {
-    console.log('dispatching: dispatchOnTaskAdd');
     dispatch(fetchTaskUploadActionCreator(projectId, name, description))
   }
 })

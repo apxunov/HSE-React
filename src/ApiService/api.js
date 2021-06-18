@@ -1,3 +1,5 @@
+import normalizeState from '../components/ProjectsData/stateNormalizer'
+
 export default class ApiService {
   BASE_URL = 'http://valerystatinov.com/api'
 
@@ -6,7 +8,7 @@ export default class ApiService {
     return fetch(`${this.BASE_URL}${url}`, {
       method,
       headers: {
-        Token: 'apxunov',
+        Token: 'Valera',
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -25,20 +27,20 @@ export default class ApiService {
   }
 
   // Загрузка задач
-  loadTasks = (url='/projects', projectId) => {
+  loadTasks = (projectId, url='/projects') => {
     return this.get(`${url}/${projectId}/tasks/`)
+    .then(response => response)
   }
 
   // Загрузка данных из API
   loadData = (url='/projects/') => {
     return this.get(url).then(response => {
-      let tasks = this.loadTasks(310).then(res => res)
-      console.log('TASKS', tasks);
 
       const result = {
         projects: [],
         tasks: []
       }
+
       Object.values(response).map( (project, id) => {
         return result.projects[id] = {
           id: project.id,
@@ -46,6 +48,22 @@ export default class ApiService {
           tasksCount: project.tasksCount
         }
       })
+      console.log(result.projects);
+
+      let tasksOnUploading = result.projects.map( project => this.loadTasks(project.id))
+      const tasksUploaded = Promise.all(tasksOnUploading).then( responses => {
+        Object.entries(responses).map((response, id) => {
+          console.log(response[1], id)
+          return result.projects[id].tasks = response[1]
+        })
+        // Object.values(responses).map( response, id => {
+        //   result.projects[id].tasks = response
+        // }) 
+        console.log('result', result);
+        console.log('result', normalizeState(result));
+      })
+
+      // console.log('tasks loaded', tasks);
       return result
     })
     .catch(err => new Error('ApiService.loadData(): an error occured:\n', err))
@@ -53,10 +71,10 @@ export default class ApiService {
 
   // Загрузка нового проекта 
   uploadProject = (name, url='/projects/') => {
-    const _newProject = {
+    const project = {
       name: name
     }
-    return this.post(url, _newProject)
+    return this.post(url, project)
   }
 
   // Загрузка новой задачи 

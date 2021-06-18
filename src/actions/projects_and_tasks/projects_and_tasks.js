@@ -20,9 +20,14 @@ export const fetchProjectUploadActionCreator = (projectName) => (dispatch) => {
     .then(() => dispatch(fetchDataLoaded()))
 }
 
+// export const fetchTasksLoaded = (projectId) => (dispatch) => {
+//     const api = new ApiService()
+//     api.loadTasks(projectId)
+//     .then(response => console.log('fetch tasks loaded', response))
+// }
+
 // Добавление задачи
 export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescription) => (dispatch) => {
-    console.log("HERE'S THE TASK", projectId, taskName, taskDescription)
     const api = new ApiService()
     api.uploadTask(projectId, taskName, taskDescription)
     .then(() => dispatch(fetchDataLoaded()))
