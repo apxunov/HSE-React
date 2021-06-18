@@ -1,31 +1,47 @@
-import React from 'react'
-import {useParams} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import {useParams, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import {ThemeSwitcher} from '../UI/ThemeSwitcher/ThemeSwitcher'
 import ProjectContent from './ProjectContent/ProjectContent'
 import BackButton from '../UI/BackButton/BackButton'
 
+// Импорт action 
+import { fetchDataLoaded } from '../../actions/projects_and_tasks/projects_and_tasks' 
+
 import classes from '../ProjectsPage/ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
 const mapStateToProps = (state) => {
-    console.log('Project Page STATE', state.applicationData.projectsByIds);
+    console.log('MAP STATE TO PROPS (PROJECTPAGE)', state);
     return ({
         theme: state.themeState.theme,
         projects: state.applicationData.projectsByIds
     })
 }
 
-const ProjectPageComponent = ({theme, projects}) => {
-    const { projectId } = useParams() // получаем id проекта из URL
-    let project_id = null 
-    Object.entries(projects).map(project => project[1].id === Number(projectId) ? project_id = project[0] : null) // находим проект по id из url 
-    const project = projects[project_id]
+const mapDispatchToProps = (dispatch) => ({
+    dispatchFetchDataLoaded: (projects) => dispatch(fetchDataLoaded(projects))
+})
+  
 
-    const projectName = project?.name
-    return (
+const ProjectPageComponent = ({theme, projects, dispatchFetchDataLoaded}) => {
+    const { projectId } = useParams() // получаем id проекта из URL
+    
+    useEffect(() => {
+        dispatchFetchDataLoaded()
+    }, [])
+
+    if (projects) {
+        let project_id = null 
+        console.log('PROJECTS',projects);
+        // находим проект по id из url 
+        Object.entries(projects).map(project => project[1].id === Number(projectId) ? project_id = project[0] : null)
+        const project = projects[project_id]
+
+        const projectName = project?.name
+        return (
             <section className={cx('application-wrapper', `application-wrapper-theme-${theme}`)}>
                 <BackButton/>
             <> 
@@ -38,6 +54,10 @@ const ProjectPageComponent = ({theme, projects}) => {
             </section>
         )
     }
+    else {
+        return (<Redirect to='/404'/>)
+    }
+}
 
 
-export const ProjectPage = connect(mapStateToProps)(ProjectPageComponent)
+export const ProjectPage = connect(mapStateToProps, mapDispatchToProps)(ProjectPageComponent)

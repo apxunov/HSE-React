@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     dispatchFetchDataLoaded: (projects) => dispatch(fetchDataLoaded(projects))
-  })
+})
   
 
 const ProjectsListComponent = ( {projects, dispatchFetchDataLoaded} ) => {  
