@@ -13,7 +13,7 @@ const cx = classnames.bind(classes)
 const mapStateToProps = (state) => (
     {
         theme: state.themeState.theme,
-        tasks: state.tasksByIds.tasks
+        tasks: state.applicationData.tasksByIds
     }
 )
 

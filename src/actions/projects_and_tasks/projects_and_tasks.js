@@ -4,11 +4,11 @@ export const PROJECTS_LOAD = 'PROJECTS_LOAD'
 export const fetchDataLoaded = () => (dispatch) => {
     const api = new ApiService()
     api.loadData().then( response => {
-        const { projects, tasks } = response
+        const { projectsById, tasksById } = response
         dispatch({
             type: PROJECTS_LOAD,
-            projects: projects,
-            tasks: tasks
+            projects: projectsById,
+            tasks: tasksById
         })
     })
 }
@@ -19,12 +19,6 @@ export const fetchProjectUploadActionCreator = (projectName) => (dispatch) => {
     api.uploadProject(projectName)
     .then(() => dispatch(fetchDataLoaded()))
 }
-
-// export const fetchTasksLoaded = (projectId) => (dispatch) => {
-//     const api = new ApiService()
-//     api.loadTasks(projectId)
-//     .then(response => console.log('fetch tasks loaded', response))
-// }
 
 // Добавление задачи
 export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescription) => (dispatch) => {

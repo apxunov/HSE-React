@@ -32,39 +32,30 @@ export default class ApiService {
     .then(response => response)
   }
 
-  // Загрузка данных из API
+  // Загрузка данных из API и их нормализация
   loadData = (url='/projects/') => {
     return this.get(url).then(response => {
 
-      const result = {
-        projects: [],
-        tasks: []
-      }
+      const projects = []
 
       Object.values(response).map( (project, id) => {
-        return result.projects[id] = {
+        return projects.push({
           id: project.id,
           name: project.name,
           tasksCount: project.tasksCount
-        }
-      })
-      console.log(result.projects);
-
-      let tasksOnUploading = result.projects.map( project => this.loadTasks(project.id))
-      const tasksUploaded = Promise.all(tasksOnUploading).then( responses => {
-        Object.entries(responses).map((response, id) => {
-          console.log(response[1], id)
-          return result.projects[id].tasks = response[1]
         })
-        // Object.values(responses).map( response, id => {
-        //   result.projects[id].tasks = response
-        // }) 
-        console.log('result', result);
-        console.log('result', normalizeState(result));
       })
 
-      // console.log('tasks loaded', tasks);
-      return result
+      let tasksOnUploading = projects.map( project => this.loadTasks(project.id))
+      
+      const normalizedState = Promise.all(tasksOnUploading).then( responses => {
+        Object.entries(responses).map((response, id) => {
+          return projects[id].tasks = response[1]
+        })
+        return normalizeState(projects)
+      })
+
+      return normalizedState
     })
     .catch(err => new Error('ApiService.loadData(): an error occured:\n', err))
   }
