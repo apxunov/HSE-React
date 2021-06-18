@@ -8,7 +8,7 @@ export default class ApiService {
     return fetch(`${this.BASE_URL}${url}`, {
       method,
       headers: {
-        Token: 'Valera',
+        Token: 'apxunov',
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
@@ -69,7 +69,7 @@ export default class ApiService {
   }
 
   // Загрузка новой задачи 
-  uploadTask = (url='/projects', projectId, name, description) => {
+  uploadTask = (projectId, name, description, url='/projects') => {
     const task = {
       'name': name,
       'description': description,
