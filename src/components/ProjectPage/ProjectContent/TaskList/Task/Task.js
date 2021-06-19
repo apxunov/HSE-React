@@ -26,15 +26,16 @@ const TaskComponent = (
         theme, 
         tasks,
         id,
+        completed,
         projectId,
         dispatchOnStatusChange
     }) => {
 
     const task = tasks[id]
-    const classTaskStatus = task.completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
+    const classTaskStatus = completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
     
     const handleClick = () => {
-        return dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
+        return dispatchOnStatusChange(projectId,task.id, task.name, task.description, completed)
     }
 
     return (
@@ -43,7 +44,7 @@ const TaskComponent = (
                 <h2>{task.name}</h2>
                 <p>{task.description}</p>
                 { 
-                task.completed 
+                completed 
                     ?   <Button btnName='Undone' onClick={handleClick}/> 
                     :   <Button btnName='Done' onClick={handleClick}/> 
                 }

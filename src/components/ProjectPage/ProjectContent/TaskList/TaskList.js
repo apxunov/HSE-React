@@ -2,14 +2,12 @@ import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {Task} from './Task/Task'
-// import { fetchDataLoaded } from '../../../../actions/projects_and_tasks/projects_and_tasks'
 import { fetchLoadProjectTasks } from '../../../../actions/projects_and_tasks/projects_and_tasks'
 
 const mapStateToProps = (state) => {
     console.log('taskslist', state);
     return({
-        tasks: state.applicationData.tasksByIds,
-        projects: state.applicationData.projectsByIds
+        tasks: state.applicationData.currentTasks,
     })
 }
 
@@ -17,34 +15,21 @@ const mapDispatchToProps = (dispatch) => ({
     dispatchFetchDataLoaded: (projectId) => dispatch(fetchLoadProjectTasks(projectId))
 })
 
-const TaskListComponent = ( {projectId, projects, tasks, dispatchFetchDataLoaded} ) => {
+const TaskListComponent = ( {projectId, tasks, dispatchFetchDataLoaded} ) => {
     
     useEffect(() => {
         dispatchFetchDataLoaded(projectId)
     }, [])
 
-    const searchForTask = (tasksIds, tasksList) => {
-        const specificTasksList = {}
-        Object.values(tasksIds)?.map( taskId => {
-            return Object.values(tasksList).map( (task) => {
-                return task.id.toString() === taskId.toString() 
-                ? specificTasksList[taskId] = task
-                : null
-            })
-        })
-        return specificTasksList
-    }
-    const projectTasksIds = projects[projectId]?.tasksIds
-    const projectTasks = searchForTask(projectTasksIds, tasks)
-
-    if (projectTasks) {
+    if (tasks) {
         return (
-            Object.values(projectTasks).map( task => {
+            Object.values(tasks).map( task => {
                 return (
                     <Task
                         projectId={projectId}
                         key={task.id}
                         id={task.id}
+                        completed={task.completed}
                     />
                 )
             })

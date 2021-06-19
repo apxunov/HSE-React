@@ -13,14 +13,16 @@ export default class ApiService {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
-    }).then(res => res.json())
+    })
   }
 
   get(url) {
       return this.request(url, 'GET')
+      .then(res => res.json())
   }
   post(url, body) {
       return this.request(url, 'POST', body)
+      .then(res => res.json())
   }
   put(url, body) {
       return this.request(url, 'PUT', body)
