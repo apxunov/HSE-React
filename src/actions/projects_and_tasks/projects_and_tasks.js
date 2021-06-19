@@ -25,7 +25,7 @@ export const fetchProjectUploadActionCreator = (projectName) => (dispatch) => {
 export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescription) => (dispatch) => {
     const api = new ApiService()
     api.uploadTask(projectId, taskName, taskDescription)
-    return dispatch(fetchDataLoaded)
+    .then( () => dispatch(fetchDataLoaded()))
 }
 
 // Смена статуса задачи
