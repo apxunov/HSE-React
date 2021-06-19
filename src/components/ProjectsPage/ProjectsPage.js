@@ -10,7 +10,7 @@ import classes from './ProjectsPage.module.scss'
 import classnames from "classnames/bind"
 const cx = classnames.bind(classes)
 
-const mapStateToProps = (state) => ({theme: state.themeState.theme,})
+const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
 const ProjectsPageComponent = ({theme}) => {
     return (

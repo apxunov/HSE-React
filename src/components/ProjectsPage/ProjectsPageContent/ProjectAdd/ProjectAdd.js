@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // Импорт компонентов 
-import { ProjectInput } from './ProjectInput/ProjectInput'
+import {ProjectInput} from './ProjectInput/ProjectInput'
 
 // Импорт стилей
 import './ProjectAdd.module.scss';
@@ -12,13 +12,11 @@ const cx = classnames.bind(classes)
 
 const mapStateToProps = (state) => ({theme: state.themeState.theme})
 
-const ProjectAddComponent = ({theme, onProjectAddHandler}) => {
+const ProjectAddComponent = ({theme}) => {
     return(
         <div className={cx("project-add", "project", `project-theme-${theme}`)}>
             <h2>Create new project</h2>
-            <ProjectInput 
-                onProjectAddHandler={onProjectAddHandler}
-            />
+            <ProjectInput/>
         </div>
     )
 }
