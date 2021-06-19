@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {Task} from './Task/Task'
-import { fetchDataLoaded } from '../../../../actions/projects_and_tasks/projects_and_tasks'
+// import { fetchDataLoaded } from '../../../../actions/projects_and_tasks/projects_and_tasks'
+import { fetchLoadProjectTasks } from '../../../../actions/projects_and_tasks/projects_and_tasks'
 
 const mapStateToProps = (state) => {
     console.log('taskslist', state);
@@ -13,10 +14,15 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    dispatchFetchDataLoaded: (projects, tasks) => dispatch(fetchDataLoaded(projects, tasks))
+    dispatchFetchDataLoaded: (projectId) => dispatch(fetchLoadProjectTasks(projectId))
 })
 
-const TaskListComponent = ( {projectId, projects, tasks} ) => {
+const TaskListComponent = ( {projectId, projects, tasks, dispatchFetchDataLoaded} ) => {
+    
+    useEffect(() => {
+        dispatchFetchDataLoaded(projectId)
+    }, [])
+
     const searchForTask = (tasksIds, tasksList) => {
         const specificTasksList = {}
         Object.values(tasksIds)?.map( taskId => {

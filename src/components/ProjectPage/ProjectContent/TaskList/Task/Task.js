@@ -29,8 +29,14 @@ const TaskComponent = (
         projectId,
         dispatchOnStatusChange
     }) => {
+
     const task = tasks[id]
     const classTaskStatus = task.completed ? classes.completed : classes.incompleted // возвратим разные классы в зависимости от completed-статуса таски
+    
+    const handleClick = () => {
+        return dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
+    }
+
     return (
             // в зависимости от темы приложения и completed-статуса таски возвращаем стили
             <div id={id} className={cx('task', `task-theme-${theme}`, `${classTaskStatus}`)}> 
@@ -38,12 +44,8 @@ const TaskComponent = (
                 <p>{task.description}</p>
                 { 
                 task.completed 
-                    ?   <Button btnName='Undone' onClick={
-                            () => dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
-                        }/> 
-                    :   <Button btnName='Done' onClick={
-                            () => dispatchOnStatusChange(projectId,task.id, task.name, task.description, task.completed)
-                    }   /> 
+                    ?   <Button btnName='Undone' onClick={handleClick}/> 
+                    :   <Button btnName='Done' onClick={handleClick}/> 
                 }
             </div>
         )}

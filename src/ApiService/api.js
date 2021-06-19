@@ -37,7 +37,7 @@ export default class ApiService {
     return this.get(url).then(response => {
       
       const projects = []
-      Object.values(response).map( (project, id) => {
+      Object.values(response).map( (project) => {
         return projects.push({
           id: project.id,
           name: project.name,
@@ -79,7 +79,6 @@ export default class ApiService {
 
   // Смена статуса задачи
   changeStatus = (projectId, taskId, name, description, completed, url='/projects') => {
-    console.log(`${url}/${projectId}/tasks/${taskId}`);
     const updatedTask = {
       name,
       description,
