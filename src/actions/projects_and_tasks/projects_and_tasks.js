@@ -45,5 +45,5 @@ export const fetchTaskUploadActionCreator = (projectId, taskName, taskDescriptio
 export const fetchStatusActionCreator = (projectId, taskId, name, description, completed) => (dispatch) => {
     const api = new ApiService()
     api.changeStatus(projectId, taskId, name, description, completed)
-    .then(() => dispatch(fetchLoadProjectTasks(projectId)))
+    .then(() => dispatch(fetchDataLoaded()))
 }
