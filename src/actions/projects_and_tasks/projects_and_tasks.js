@@ -14,19 +14,6 @@ export const fetchDataLoaded = () => (dispatch) => {
     })
 }
 
-// Загрузка задач проекта (используется в TaskList)
-export const TASKS_LOAD = 'TASKS_LOAD'
-export const fetchLoadProjectTasks = (projectId) => (dispatch) => {
-    const api = new ApiService()
-    api.loadTasks(projectId).then( response => {
-        const tasks = response
-        dispatch({
-            type: TASKS_LOAD,
-            tasks: tasks
-        })
-    })
-}
-
 // Добавление проекта (на бэкенд)
 export const fetchProjectUploadActionCreator = (projectName) => (dispatch) => {
     const api = new ApiService()

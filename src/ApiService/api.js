@@ -88,7 +88,6 @@ export default class ApiService {
       'completed': !completed,
       'projectId': Number(projectId)
     }
-    console.log(updatedTask);
     return this.put(`${url}/${projectId}/tasks/${taskId}/`, updatedTask)
   }
 }

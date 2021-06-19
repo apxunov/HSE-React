@@ -5,7 +5,6 @@ import {Task} from './Task/Task'
 import { fetchDataLoaded } from '../../../../actions/projects_and_tasks/projects_and_tasks'
 
 const mapStateToProps = (state) => {
-    console.log('taskslist', state);
     return({
         tasks: state.applicationData.tasksByIds,
         projects: state.applicationData.projectsByIds
